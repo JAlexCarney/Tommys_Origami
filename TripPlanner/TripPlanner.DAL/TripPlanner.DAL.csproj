@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repos\" />
+    <ProjectReference Include="..\TripPlanner.Core\TripPlanner.Core.csproj" />
   </ItemGroup>
 
 </Project>

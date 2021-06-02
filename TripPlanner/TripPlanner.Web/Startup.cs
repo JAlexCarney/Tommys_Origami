@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Core.Interfaces;
 using TripPlanner.DAL;
+using TripPlanner.DAL.Repos;
 
 namespace TripPlanner.Web
 {
@@ -47,11 +48,13 @@ namespace TripPlanner.Web
                 services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             });
             services.AddControllersWithViews();
-            services.AddTransient<ITripRepository, TripRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IReviewRepository, ReviewRepository>();
-            services.AddTransient<IDestinationRepository, DestinationRepository>();
-            services.AddTransient<IDestinationTripRepository, DestinationTripRepository>();
+            services.AddTransient<ITripRepository, EFTripRepository>();
+            services.AddTransient<IUserRepository, EFUserRepository>();
+            services.AddTransient<IReviewRepository, EFReviewRepository>();
+            services.AddTransient<IDestinationRepository, EFDestinationRepository>();
+            services.AddTransient<IDestinationTripRepository, EFDestinationTripRepository>();
+            services.AddTransient<IReportsRepository, ADOReportsRepository>();
+
 
             services.AddCors(options => options.AddPolicy("corspolicy", (builder) =>
             {

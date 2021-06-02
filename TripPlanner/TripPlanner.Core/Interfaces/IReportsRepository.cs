@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TripPlanner.Core.Interfaces
 {
-    class IReportsRepository
+    public interface IReportsRepository
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TripPlanner.DAL.Repos
 {
-    class EFReviewRepository
+    public class EFReviewRepository
     {
     }
 }
