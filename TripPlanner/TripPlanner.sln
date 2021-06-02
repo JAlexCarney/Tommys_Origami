@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Core", "TripPla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.DAL.Tests", "TripPlanner.DAL.Tests\TripPlanner.DAL.Tests.csproj", "{A1953CF9-BE33-4D05-9180-1ED0813C6433}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Web", "TripPlanner.Web\TripPlanner.Web.csproj", "{41247FD0-2DD4-4922-8F0F-ED98513B5992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Web", "TripPlanner.Web\TripPlanner.Web.csproj", "{60C45852-5D3B-4D52-8BD6-32F23C0C1034}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{A1953CF9-BE33-4D05-9180-1ED0813C6433}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1953CF9-BE33-4D05-9180-1ED0813C6433}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1953CF9-BE33-4D05-9180-1ED0813C6433}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41247FD0-2DD4-4922-8F0F-ED98513B5992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41247FD0-2DD4-4922-8F0F-ED98513B5992}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41247FD0-2DD4-4922-8F0F-ED98513B5992}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41247FD0-2DD4-4922-8F0F-ED98513B5992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C45852-5D3B-4D52-8BD6-32F23C0C1034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C45852-5D3B-4D52-8BD6-32F23C0C1034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C45852-5D3B-4D52-8BD6-32F23C0C1034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C45852-5D3B-4D52-8BD6-32F23C0C1034}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
