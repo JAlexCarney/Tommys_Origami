@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.DAL", "TripPlanner.DAL\TripPlanner.DAL.csproj", "{C8608511-8A20-4D9C-957B-9024B06DDB96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.Core", "TripPlanner.Core\TripPlanner.Core.csproj", "{3D925887-E531-486F-A20C-68C52D5E7F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Core", "TripPlanner.Core\TripPlanner.Core.csproj", "{3D925887-E531-486F-A20C-68C52D5E7F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.DAL.Tests", "TripPlanner.DAL.Tests\TripPlanner.DAL.Tests.csproj", "{A1953CF9-BE33-4D05-9180-1ED0813C6433}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.DAL.Tests", "TripPlanner.DAL.Tests\TripPlanner.DAL.Tests.csproj", "{A1953CF9-BE33-4D05-9180-1ED0813C6433}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.Web", "TripPlanner.Web\TripPlanner.Web.csproj", "{41247FD0-2DD4-4922-8F0F-ED98513B5992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Web", "TripPlanner.Web\TripPlanner.Web.csproj", "{41247FD0-2DD4-4922-8F0F-ED98513B5992}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
