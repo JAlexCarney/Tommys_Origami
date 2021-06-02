@@ -1,0 +1,96 @@
+TripPlanner.Core
+	DTOs
+		DestinationReportListElement.cs
+	Entities
+		Trip.cs
+		User.cs
+		Review.cs
+		Destination.cs
+		DestinationTrip.cs
+	Interfaces
+		ITripRepository.cs
+			+Add(Trip) : Response<Trip>
+			+Edit(Trip) : Response
+			+Remove(int) : Response
+			+Get(int) : Response<Trip>
+			+GetByUser(int) : Response<List<Trip>>
+		IUserRepository.cs
+			+Add(User) : Response<User>
+			+Edit(User) : Response
+			+Remove(int) : Response
+			+Get(int) : Response<User>
+		IReviewRepository.cs
+			
+		IDestinationRepository.cs
+		IDestinationTripRepository.cs
+	Scripts
+		TripPlannerDDL.sql
+		TripPlannerDML.sql
+	Response.cs
+		+Response<T>
+			+Success : bool
+			+Message : string
+			+Data : T
+
+TripPlanner.DAL
+	TripPlannerAppContext.cs
+	EFTripRepository.cs
+	EFUserRepository.cs
+	EFReviewRepository.cs
+	EFDestinationRepository.cs
+	EFDestinationTripRepository.cs
+
+TripPlanner.DAL.Tests
+	EFTripRepositoryTests.cs
+	EFUserRepositoryTests.cs
+	EFReviewRepositoryTests.cs
+	EFDestinationRepositoryTests.cs
+	EFDestinationTripRepositoryTests.cs
+
+TripPlanner.Web
+	Program.cs
+	Startup.cs
+	Views
+		Destinations
+			Add.cshtml //destinations/add
+			Get.cshtml //destinations/{id}
+			List.cshtml //destinations
+			Edit.cshtml //destinations/edit/{id}
+			Remove.cshtml //destinations/remove/{id}
+	Controllers
+		API
+			AuthController.cs
+				+Login : IActionResult //api/auth/login
+			UsersController.cs
+				+GetAllUsers : IActionResult //api/users (GET)
+				+GetUser : IActionResult //api/users/{id} (GET)
+				+AddUser : IActionResult //api/users (POST)
+				+EditUser : IActionResult //api/users (PUT)
+				+RemoveUser : IActionResult //api/users/{id} (DELETE)
+			TripsController.cs
+				+GetAllTrips : IActionResult //api/trips (GET)
+				+GetTripsByUser : IActionResult //api/trips/{userID} (GET)
+				+GetTrip : IActionResult //api/trips/{id} (Get)
+				+AddTrip : IActionResult //api/trips (POST)
+				+EditUser : IActionResult //api/trips (PUT)
+				+RemoveUser : IActionResult //api/trips/{id} (DELETE)
+			DestinationTripsController.cs
+				+GetAllDestinationTrips : IActionResult //api/trips/{id}/destinations (GET)
+				+GetDestinationTrips : IActionResult //api/trips/{id}/destinations/{id} (GET)
+				+AddDestinationTrips : IActionResult //api/trips/{id}/destinations (POST)
+				+EditDestinationTrips : IActionResult //api/trips/{id}/destinations (PUT)
+				+RemoveDestinationTrips : IActionResult //api/trips/{id}/destinations/{id} (DELETE)
+			ReportsController.cs
+				+TopRatedDestinations : IActionResult //api/toprateddestinations (GET)
+				+MostVisitedDestinations : IActionResult //api/mostvisiteddestinations (GET)
+				+MostRatedDestinations : IActionResult //api/mostrateddestinations (GET)
+		DestinationsController.cs
+			+List : IActionResult //destinations
+			+Get(int) : IActionResult //destinations/{id}
+			+Add : IActionResult //destinations/add
+			+Add(Destination) : IActionResult
+			+Edit(int) : IActionResult //destinations/edit/{id}
+			+Edit(Destination) : IActionResult
+			+Remove(int) : IActionResult //destinations/remove/{id}
+			+Remove(Destination) : IActionResult
+
