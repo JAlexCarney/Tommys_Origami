@@ -22,4 +22,8 @@
     <Folder Include="Repos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TripPlanner.Core\TripPlanner.Core.csproj" />
+  </ItemGroup>
+
 </Project>
