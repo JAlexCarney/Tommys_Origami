@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripPlanner.Core.Interfaces;
+using TripPlanner.DAL;
 
 namespace TripPlanner.Web
 {
@@ -28,11 +30,9 @@ namespace TripPlanner.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TripPlannerContext>(options =>
-                options.UseSqlServer(TripPlannerContext.GetConnectionString()));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
-            {
+           {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -66,12 +66,6 @@ namespace TripPlanner.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            //else
-            //{
-            //    app.UseExceptionHandler("/Error");
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
