@@ -22,4 +22,8 @@
     <ProjectReference Include="..\TripPlanner.Core\TripPlanner.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TripPlanner.Core\TripPlanner.Core.csproj" />
+  </ItemGroup>
+
 </Project>
