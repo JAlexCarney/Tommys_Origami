@@ -20,9 +20,24 @@ TripPlanner.Core
 			+Remove(int) : Response
 			+Get(int) : Response<User>
 		IReviewRepository.cs
-			
+			+Add(Review) : Response<Review>
+			+Edit(Review) : Response
+			+Remove(int) : Response
+			+Get(int) : Response<Review>
+			+GetByUser(int) : Response<List<Review>>
+			+GetByDestination(int) : Response<List<Review>>
 		IDestinationRepository.cs
+			+Add(Destination) : Response<Destination>
+			+Edit(Destination) : Response
+			+Remove(int) : Response
+			+Get(int) : Response<Destination>
+			+GetAll() : Response<List<Destination>>
 		IDestinationTripRepository.cs
+			+Add(DestinationTrip) : Response<DestinationTrip>
+			+Edit(DestinationTrip) : Response
+			+Remove(int) : Response
+			+Get(int) : Response<DestinationTrip>
+			+GetByTrip(int) : Response<List<DestinationTrip>>
 	Scripts
 		TripPlannerDDL.sql
 		TripPlannerDML.sql
