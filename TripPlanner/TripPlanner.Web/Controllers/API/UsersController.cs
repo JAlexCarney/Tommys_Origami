@@ -10,8 +10,8 @@ using TripPlanner.Core.Interfaces;
 
 namespace TripPlanner.Web.Controllers.API
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -21,7 +21,7 @@ namespace TripPlanner.Web.Controllers.API
             _userRepository = userRepository;
         }
 
-        [HttpGet] 
+        [HttpGet(Name = "GetUser")] 
         [Route("{id}")]
         public IActionResult GetUser(Guid id)
         {

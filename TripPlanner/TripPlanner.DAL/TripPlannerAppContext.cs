@@ -11,7 +11,7 @@ namespace TripPlanner.DAL
     public class TripPlannerAppContext : DbContext
     {
         public DbSet<Destination> Destination { get; set; }
-        public DbSet<DestinationTrip> DestinationTrip { get; set; }
+        public DbSet<DestinationTrip> TripDestination { get; set; }
         public DbSet<Review> Review { get; set; }
         public DbSet<Trip> Trip { get; set; }
         public DbSet<User> User { get; set; }
@@ -23,6 +23,13 @@ namespace TripPlanner.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Destination>().HasMany(d => d.Trips).WithMany(t => t.Destinations)
+            //    .UsingEntity<Dictionary<string, object>>
+            //    (
+            //        "DestinationTrip",
+            //        dt => dt.HasOne<Trip>().WithMany().HasForeignKey("TripID"),
+            //        dt => dt.HasOne<Destination>().WithMany().HasForeignKey("DestinationID")
+            //    );
             modelBuilder.Entity<DestinationTrip>().HasKey(aa => new { aa.DestinationID, aa.TripID });
             modelBuilder.Entity<Review>().HasKey(aa => new { aa.DestinationID, aa.UserID });
             /*
