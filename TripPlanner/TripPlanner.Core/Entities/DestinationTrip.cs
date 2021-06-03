@@ -8,8 +8,13 @@ namespace TripPlanner.Core.Entities
 {
     public class DestinationTrip
     {
+        // Tabel Properties
         public int TripID { get; set; }
         public int DestinationID { get; set; }
         public string Description { get; set; }
+
+        // Navigation Properties
+        public Trip Trip { get; set; }
+        public Destination Destination { get; set; }
     }
 }

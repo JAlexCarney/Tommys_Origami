@@ -25,7 +25,7 @@ namespace TripPlanner.DAL
         {
             modelBuilder.Entity<DestinationTrip>().HasKey(aa => new { aa.DestinationID, aa.TripID });
             modelBuilder.Entity<Review>().HasKey(aa => new { aa.DestinationID, aa.UserID });
-
+            /*
             modelBuilder.Entity<Destination>().HasMany<Review>();
             modelBuilder.Entity<DestinationTrip>().HasOne<Destination>(); //needed?
             modelBuilder.Entity<DestinationTrip>().HasOne<Trip>(); //needed?
@@ -35,7 +35,7 @@ namespace TripPlanner.DAL
             modelBuilder.Entity<Trip>().HasOne<User>();
             modelBuilder.Entity<User>().HasMany<Review>();
             modelBuilder.Entity<User>().HasMany<Trip>();
-
+            */
         }
 
         public static TripPlannerAppContext GetDBContext()

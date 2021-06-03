@@ -13,26 +13,32 @@ namespace TripPlanner.DAL.Repos
     {
         private readonly TripPlannerAppContext _context;
 
-        public EFUserRepository() 
+        public EFUserRepository()
         {
             _context = TripPlannerAppContext.GetDBContext();
         }
 
-        public EFUserRepository(TripPlannerAppContext context) 
+        public EFUserRepository(TripPlannerAppContext context)
         {
             _context = context;
         }
 
         public Response<User> Add(User user)
         {
-            User added;
             var response = new Response<User>();
+            var validationResponse = IsValid(user);
+            if (!validationResponse.Success)
+            {
+                response.Message = validationResponse.Message;
+                return response;
+            }
+            User added;
             try
             {
                 added = _context.User.Add(user).Entity;
                 _context.SaveChanges();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 response.Message = ex.Message;
                 return response;
@@ -43,12 +49,17 @@ namespace TripPlanner.DAL.Repos
 
         public Response Edit(User user)
         {
-            User editing;
             var response = new Response();
+            var validationResponse = IsValid(user);
+            if (!validationResponse.Success) 
+            {
+                return validationResponse;
+            }
+            User editing;
             try
             {
                 editing = _context.User.Find(user.UserID);
-                if (editing == null) 
+                if (editing == null)
                 {
                     response.Message = "Failed to find User with given Id";
                     return response;
@@ -60,7 +71,7 @@ namespace TripPlanner.DAL.Repos
                 _context.SaveChanges();
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 response.Message = ex.Message;
                 return response;
@@ -93,27 +104,27 @@ namespace TripPlanner.DAL.Repos
             try
             {
                 toRemove = _context.User.Find(userID);
-                if (toRemove == null) 
+                if (toRemove == null)
                 {
                     response.Message = "Failed to find User with given Id";
                     return response;
                 }
                 var reviewsToRemove = _context.Review.Where(r => r.UserID == userID);
-                if (reviewsToRemove.Any()) 
+                if (reviewsToRemove.Any())
                 {
-                    foreach (Review review in reviewsToRemove) 
+                    foreach (Review review in reviewsToRemove)
                     {
                         _context.Review.Remove(review);
                         _context.SaveChanges();
                     }
                 }
                 var tripsToRemove = _context.Trip.Where(t => t.UserID == userID);
-                if(tripsToRemove.Any())
+                if (tripsToRemove.Any())
                 {
                     foreach (Trip trip in tripsToRemove)
                     {
                         var destinationTripsToRemove = _context.DestinationTrip.Where(dt => dt.TripID == trip.TripID);
-                        if (destinationTripsToRemove.Any()) 
+                        if (destinationTripsToRemove.Any())
                         {
                             foreach (DestinationTrip destinationTrip in destinationTripsToRemove)
                             {
@@ -132,6 +143,24 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = ex.Message;
                 return response;
+            }
+            return response;
+        }
+
+        private static Response IsValid(User user) 
+        {
+            var response = new Response();
+            if (string.IsNullOrEmpty(user.Email)) 
+            {
+                response.Message = "Email is required";
+            }
+            else if (string.IsNullOrEmpty(user.Password)) 
+            {
+                response.Message = "Password is required";
+            }
+            else if (user.DateCreated == new DateTime()) 
+            {
+                response.Message = "Date created is required";
             }
             return response;
         }
