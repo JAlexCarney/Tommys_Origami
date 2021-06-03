@@ -1,4 +1,5 @@
 import './App.css';
+import TripPlanner from './Components/TripPlanner';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           </div>
         </nav>
       </header>
-      
+      <TripPlanner />
     </div>
   );
 }
