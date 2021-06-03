@@ -176,7 +176,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Start date is required";
             }
-            else if ((trip.StartDate > DateTime.Now))
+            else if (trip.StartDate.Subtract(DateTime.Now).Ticks < 0)
             {
                 response.Message = "Start date must be in the future";
             }
@@ -185,7 +185,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Projected end date is required";
             }
-            else if ((trip.ProjectedEndDate > trip.StartDate))
+            else if ((trip.ProjectedEndDate.Subtract(trip.StartDate)).Ticks < 0)
             {
                 response.Message = "Projected end date must come after Start date";
             }
@@ -206,7 +206,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Start date is required";
             }
-            else if ((trip.StartDate > DateTime.Now))
+            else if ((trip.StartDate.Subtract(DateTime.Now)).Ticks < 0)
             {
                 response.Message = "Start date must be in the future";
             }
@@ -215,12 +215,12 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Projected end date is required";
             }
-            else if ((trip.ProjectedEndDate > trip.StartDate))
+            else if ((trip.ProjectedEndDate.Subtract(trip.StartDate)).Ticks < 0)
             {
                 response.Message = "Projected end date must come after Start date";
             }
             //actual end date (if not null) must come after start date
-            else if ((trip.ActualEndDate != null) && (trip.ActualEndDate < trip.StartDate))
+            else if ((trip.ActualEndDate != null) && ((trip.ActualEndDate.Value.Subtract(trip.StartDate)).Ticks < 0))
             {
                 response.Message = "Actual end date must come after start date";
             }
