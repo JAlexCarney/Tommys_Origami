@@ -15,7 +15,8 @@ namespace TripPlanner.DAL.Tests
     public class EFTripRepositoryTests
     {
         private TripPlannerAppContext _tripPlannerAppContext;
-        ITripRepository repo;
+        ITripRepository tripRepo;
+        IUserRepository userRepo;
 
         [SetUp]
         public void Setup()
@@ -23,7 +24,9 @@ namespace TripPlanner.DAL.Tests
             _tripPlannerAppContext = GetInMemoryDBContext();
             _tripPlannerAppContext.Database.EnsureDeleted();
             _tripPlannerAppContext.Database.EnsureCreated();
-            repo = new EFTripRepository(_tripPlannerAppContext);
+            tripRepo = new EFTripRepository(_tripPlannerAppContext);
+            userRepo = new EFUserRepository(_tripPlannerAppContext);
+
         }
         public static TripPlannerAppContext GetInMemoryDBContext()
         {
@@ -36,13 +39,20 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldAddATrip()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsTrue(response.Success);
             Assert.NotZero(trip.TripID);
@@ -52,14 +62,21 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldGetTrip()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
-            repo.Add(trip);
+            tripRepo.Add(trip);
 
-            Response<Trip> response = repo.Get(1);
+            Response<Trip> response = tripRepo.Get(1);
 
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.Data);
@@ -68,13 +85,13 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldNotGetTrip()
         {
-            Response<Trip> response = repo.Get(5);
+            Response<Trip> response = tripRepo.Get(5);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
         }
         [Test]
-        public void ShouldNotAddATripIfUserIDDoesNotExist()
+        public void ShouldNotAddATripIfUserIdDoesNotExist()
         {
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("b1ba3417-41ea-4428-b9dd-8684e6374f8b");
@@ -82,7 +99,7 @@ namespace TripPlanner.DAL.Tests
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -91,13 +108,20 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldNotAddATripIfStartDateIsInThePast()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
-            trip.UserID = Guid.Parse("b1ba3417-41ea-4428-b9dd-8684e6374f8b");
+            trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("05-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -106,13 +130,20 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldNotAddATripIfProjectedEndDateIsBeforeStartDate()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-06-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-01-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -121,6 +152,13 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldFailIfActualEndDateIsPassedIn()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
@@ -128,7 +166,7 @@ namespace TripPlanner.DAL.Tests
             trip.ActualEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -142,7 +180,7 @@ namespace TripPlanner.DAL.Tests
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -151,12 +189,19 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldFailIfStartDateIsNotPassedIn()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -165,12 +210,19 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldFailIfProjectedEndDateIsNotPassedIn()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.Booked = true;
 
-            Response<Trip> response = repo.Add(trip);
+            Response<Trip> response = tripRepo.Add(trip);
 
             Assert.IsFalse(response.Success);
             Assert.IsNull(response.Data);
@@ -179,40 +231,54 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldEditTrip()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            repo.Add(trip);
+            tripRepo.Add(trip);
 
             Trip editTrip = trip;
             editTrip.ProjectedEndDate = DateTime.Parse("08-07-2021");
 
-            Response response = repo.Edit(editTrip);
+            Response response = tripRepo.Edit(editTrip);
             Assert.IsTrue(response.Success);
 
-            Response<Trip> result = repo.Get(1);
-            Assert.AreEqual(result.Data.ProjectedEndDate, DateTime.Parse("08-07-2021"));
+            Response<Trip> result = tripRepo.Get(1);
+            Assert.AreEqual(DateTime.Parse("08-07-2021"), result.Data.ProjectedEndDate);
         }
 
         [Test]
         public void ShouldNotEditIfActualEndDateIsPriorToStartDate()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            repo.Add(trip);
+            tripRepo.Add(trip);
 
             Trip editTrip = trip;
             editTrip.ActualEndDate = DateTime.Parse("07-29-2021");
 
 
-            Response response = repo.Edit(editTrip);
+            Response response = tripRepo.Edit(editTrip);
             Assert.IsFalse(response.Success);
 
         }
@@ -220,13 +286,20 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldRemoveTrip()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response response = repo.Remove(1);
+            Response response = tripRepo.Remove(1);
 
             Assert.IsTrue(response.Success);
 
@@ -235,20 +308,27 @@ namespace TripPlanner.DAL.Tests
         [Test]
         public void ShouldNotRemoveTripIfIdDoesNotExist()
         {
-            Response response = repo.Remove(3);
+            Response response = tripRepo.Remove(3);
             Assert.IsFalse(response.Success);
         }
 
         [Test]
         public void ShouldGetTripsByUserId()
         {
+            User user = new User();
+            user.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            userRepo.Add(user);
+
             Trip trip = new Trip();
             trip.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
             trip.StartDate = DateTime.Parse("08-01-2021");
             trip.ProjectedEndDate = DateTime.Parse("08-06-2021");
             trip.Booked = true;
 
-            Response response = repo.Add(trip);
+            Response response = tripRepo.Add(trip);
 
             Trip trip2 = new Trip();
             trip2.UserID = Guid.Parse("25f160d5-d3c6-4944-b3e5-a8d6d29831c8");
@@ -256,18 +336,18 @@ namespace TripPlanner.DAL.Tests
             trip2.ProjectedEndDate = DateTime.Parse("10-06-2021");
             trip2.Booked = false;
 
-            response = repo.Add(trip2);
+            response = tripRepo.Add(trip2);
 
-            Response<List<Trip>> trips = repo.GetByUser(trip.UserID);
+            Response<List<Trip>> trips = tripRepo.GetByUser(trip.UserID);
 
             Assert.IsTrue(trips.Success);
-            Assert.AreEqual(trips.Data.Count, 2);
+            Assert.AreEqual(2, trips.Data.Count);
         }
 
         [Test]
-        public void ShouldNotGetTripByUserIdIfTrip()
+        public void ShouldNotGetTripByUserIdIfDoesNotExist()
         {
-            Response<List<Trip>> trips = repo.GetByUser(Guid.Parse("d1f20446-cf7d-495d-8151-7a3fe68eb153"));
+            Response<List<Trip>> trips = tripRepo.GetByUser(Guid.Parse("d1f20446-cf7d-495d-8151-7a3fe68eb153"));
             Assert.IsFalse(trips.Success);
         }
 
