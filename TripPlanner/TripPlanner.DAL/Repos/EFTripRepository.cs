@@ -165,11 +165,13 @@ namespace TripPlanner.DAL.Repos
         private static Response IsValidAdd(Trip trip)
         {
             var response = new Response();
+            //userid must exist, point to valid user
             if (trip.UserID == Guid.Empty)
             {
                 response.Message = "UserID is required";
             }
             //validation to ensure userid points to valid user ?
+            //start date must exist, must be in future
             else if ((trip.StartDate == new DateTime()))
             {
                 response.Message = "Start date is required";
@@ -178,6 +180,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Start date must be in the future";
             }
+            //projected end date must exist, must come after start date
             else if ((trip.ProjectedEndDate == new DateTime()))
             {
                 response.Message = "Projected end date is required";
@@ -186,6 +189,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Projected end date must come after Start date";
             }
+            //actual end date must be null at time of trip scheduling
             else if ((trip.ActualEndDate != null))
             {
                 response.Message = "Actual end date is required to be null";
@@ -196,12 +200,9 @@ namespace TripPlanner.DAL.Repos
         private static Response IsValidEdit(Trip trip)
         {
             var response = new Response();
-            if (trip.UserID == Guid.Empty)
-            {
-                response.Message = "UserID is required";
-            }
-            //validation to ensure userid points to valid user ?
-            else if ((trip.StartDate == new DateTime()))
+            //cannot edit user
+            //startdate must exist, must be in future
+            if ((trip.StartDate == new DateTime()))
             {
                 response.Message = "Start date is required";
             }
@@ -209,6 +210,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Start date must be in the future";
             }
+            //projected end date must exist, must come after start date
             else if ((trip.ProjectedEndDate == new DateTime()))
             {
                 response.Message = "Projected end date is required";
@@ -217,6 +219,7 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Projected end date must come after Start date";
             }
+            //actual end date (if not null) must come after start date
             else if ((trip.ActualEndDate != null) && (trip.ActualEndDate < trip.StartDate))
             {
                 response.Message = "Actual end date must come after start date";
