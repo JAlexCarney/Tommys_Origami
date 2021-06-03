@@ -15,7 +15,9 @@ function App() {
           </div>
         </nav>
       </header>
-      <TripPlanner />
+      <div className="container">
+        <TripPlanner />
+      </div>
     </div>
   );
 }
