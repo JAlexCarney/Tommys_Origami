@@ -34,7 +34,7 @@ CREATE TABLE Review (
  DestinationID int not null foreign key references Destination(DestinationID),
  UserID UNIQUEIDENTIFIER not null foreign key references [User](UserID),
  [Description] VARCHAR(300) not null,
- Rating DECIMAL not null,
+ Rating DECIMAL(2,1) not null,
  CONSTRAINT PK_Review PRIMARY KEY (DestinationID, UserID)
 )
 GO
