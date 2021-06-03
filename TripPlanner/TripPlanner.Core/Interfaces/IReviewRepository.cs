@@ -11,9 +11,9 @@ namespace TripPlanner.Core.Interfaces
     {
         Response<Review> Add(Review review);
         Response Edit(Review review);
-        Response Remove(int destinationID, int userID);
-        Response<Review> Get(int destinationID, int userID);
+        Response Remove(int destinationID, Guid userID);
+        Response<Review> Get(int destinationID, Guid userID);
         Response<List<Review>> GetByDestination(int destinationID);
-        Response<List<Review>> GetByUser(int userID);
+        Response<List<Review>> GetByUser(Guid userID);
     }
 }

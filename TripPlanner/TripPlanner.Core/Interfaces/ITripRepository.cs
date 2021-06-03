@@ -13,6 +13,6 @@ namespace TripPlanner.Core.Interfaces
         Response Edit(Trip trip);
         Response Remove(int tripID);
         Response<Trip> Get(int tripID);
-        Response<List<Trip>> GetByUser(int userID);
+        Response<List<Trip>> GetByUser(Guid userID);
     }
 }

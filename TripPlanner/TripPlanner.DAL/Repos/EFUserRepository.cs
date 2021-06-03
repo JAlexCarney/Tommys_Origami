@@ -51,6 +51,7 @@ namespace TripPlanner.DAL.Repos
                 if (editing == null) 
                 {
                     response.Message = "Failed to find User with given Id";
+                    return response;
                 }
                 editing.Username = user.Username;
                 editing.Password = user.Password;
@@ -68,7 +69,7 @@ namespace TripPlanner.DAL.Repos
             return response;
         }
 
-        public Response<User> Get(int userID)
+        public Response<User> Get(Guid userID)
         {
             var response = new Response<User>();
             User found;
@@ -85,7 +86,7 @@ namespace TripPlanner.DAL.Repos
             return response;
         }
 
-        public Response Remove(int userID)
+        public Response Remove(Guid userID)
         {
             User toRemove;
             var response = new Response();
@@ -124,6 +125,8 @@ namespace TripPlanner.DAL.Repos
                         _context.SaveChanges();
                     }
                 }
+                _context.User.Remove(toRemove);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {

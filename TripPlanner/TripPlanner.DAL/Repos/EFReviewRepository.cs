@@ -21,7 +21,7 @@ namespace TripPlanner.DAL.Repos
             throw new NotImplementedException();
         }
 
-        public Response<Review> Get(int destinationID, int userID)
+        public Response<Review> Get(int destinationID, Guid userID)
         {
             throw new NotImplementedException();
         }
@@ -31,12 +31,12 @@ namespace TripPlanner.DAL.Repos
             throw new NotImplementedException();
         }
 
-        public Response<List<Review>> GetByUser(int userID)
+        public Response<List<Review>> GetByUser(Guid userID)
         {
             throw new NotImplementedException();
         }
 
-        public Response Remove(int destinationID, int userID)
+        public Response Remove(int destinationID, Guid userID)
         {
             throw new NotImplementedException();
         }

@@ -26,7 +26,7 @@ namespace TripPlanner.DAL.Repos
             throw new NotImplementedException();
         }
 
-        public Response<List<Trip>> GetByUser(int userID)
+        public Response<List<Trip>> GetByUser(Guid userID)
         {
             throw new NotImplementedException();
         }

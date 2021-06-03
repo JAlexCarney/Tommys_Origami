@@ -11,7 +11,7 @@ namespace TripPlanner.Core.Interfaces
     {
         Response<User> Add(User user);
         Response Edit(User user);
-        Response Remove(int userID);
-        Response<User> Get(int userID);
+        Response Remove(Guid userID);
+        Response<User> Get(Guid userID);
     }
 }

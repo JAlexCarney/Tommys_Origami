@@ -23,7 +23,7 @@ namespace TripPlanner.Web.Controllers.API
 
         [HttpGet] 
         [Route("{id}")]
-        public IActionResult GetUser(int id)
+        public IActionResult GetUser(Guid id)
         {
             var result = _userRepository.Get(id);
 
@@ -73,7 +73,7 @@ namespace TripPlanner.Web.Controllers.API
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult RemoveUser(int id)
+        public IActionResult RemoveUser(Guid id)
         {
             if (!_userRepository.Get(id).Success)
             {
