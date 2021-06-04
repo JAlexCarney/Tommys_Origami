@@ -147,6 +147,29 @@ namespace TripPlanner.DAL.Repos
             return response;
         }
 
+        public Response<List<User>> GetAll()
+        {
+            var response = new Response<List<User>>();
+            List<User> listUsers;
+            try
+            {
+                listUsers = _context.User.ToList();
+                if (!listUsers.Any())
+                {
+                    response.Message = $"Could not find any users";
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return response;
+            }
+
+            response.Data = listUsers;
+            return response;
+        }
+
         private static Response IsValid(User user) 
         {
             var response = new Response();
