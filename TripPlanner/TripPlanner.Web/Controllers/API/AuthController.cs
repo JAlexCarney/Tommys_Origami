@@ -58,7 +58,12 @@ namespace TripPlanner.Web.Controllers.API
             );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return Ok(new { Token = tokenString });
+            var user = users.Find(u => u.Email == loginModel.Identifier && u.Password == loginModel.Password);
+            if (user == null) 
+            {
+                user = users.Find(u => u.Username == loginModel.Identifier && u.Password == loginModel.Password);
+            }
+            return Ok(new { Token = tokenString, UserID = user.UserID.ToString() });
         }
     }
 }
