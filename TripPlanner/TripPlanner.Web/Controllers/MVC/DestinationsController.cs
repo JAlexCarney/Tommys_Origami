@@ -9,6 +9,7 @@ using TripPlanner.Core.Interfaces;
 
 namespace TripPlanner.Web.Controllers.MVC
 {
+    [Route("[controller]")]
     public class DestinationsController : Controller
     {
         private readonly IDestinationRepository _destinationRepository;
@@ -22,7 +23,7 @@ namespace TripPlanner.Web.Controllers.MVC
 
         [HttpGet(Name = "GetDestination")]
         [Route("{id}")]
-        public IActionResult GetDestination(int id)
+        public IActionResult Get(int id)
         {
             var result = _destinationRepository.Get(id);
 
@@ -35,7 +36,7 @@ namespace TripPlanner.Web.Controllers.MVC
 
         [HttpGet(Name = "GetAllDestination")]
         [Route("list")]
-        public IActionResult GetAllDestinations(int id)
+        public IActionResult GetAll(int id)
         {
             var result = _destinationRepository.GetAll();
 
