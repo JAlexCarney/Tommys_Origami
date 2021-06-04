@@ -46,7 +46,6 @@ namespace TripPlanner.DAL.Tests
             Response<User> response = repo.Add(user);
 
             Assert.IsTrue(response.Success);
-            //Assert.NotZero(user.UserID);
             Assert.AreEqual(user, response.Data);
         }
 
@@ -61,7 +60,8 @@ namespace TripPlanner.DAL.Tests
             Response<User> response = repo.Add(user);
 
             Assert.IsFalse(response.Success);
-            //Assert.Zero(user.UserID);
+            Assert.AreEqual("Password is required", response.Message);
+            
         }
 
         [Test]
@@ -75,7 +75,8 @@ namespace TripPlanner.DAL.Tests
             Response<User> response = repo.Add(user);
 
             Assert.IsFalse(response.Success);
-            //Assert.Zero(user.UserID);
+            Assert.AreEqual("Email is required", response.Message);
+
         }
 
         [Test]
@@ -89,12 +90,13 @@ namespace TripPlanner.DAL.Tests
             Response<User> response = repo.Add(user);
 
             Assert.IsFalse(response.Success);
-            //Assert.Zero(user.UserID);
+            Assert.AreEqual("Date created is required", response.Message);
+
         }
 
         //test edit
         [Test]
-        public void ShouldEdit()
+        public void ShouldEditDateCreated()
         {
             User user = new User();
             user.Password = "password";
@@ -109,6 +111,61 @@ namespace TripPlanner.DAL.Tests
 
             Assert.IsTrue(response.Success);
             Assert.AreEqual(user.DateCreated, DateTime.Parse("05-01-2021"));
+        }
+
+        [Test]
+        public void ShouldEditEmail()
+        {
+            User user = new User();
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            repo.Add(user);
+
+            User userUp = user;
+            userUp.Email = "userUp@user.com";
+
+            Response response = repo.Edit(userUp);
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual("userUp@user.com", user.Email);
+        }
+
+        [Test]
+        public void ShouldEditPassword()
+        {
+            User user = new User();
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            repo.Add(user);
+
+            User userUp = user;
+            userUp.Password = "passwordUp";
+
+            Response response = repo.Edit(userUp);
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual("passwordUp", user.Password);
+        }
+
+        [Test]
+        public void ShouldEditUsername()
+        {
+            User user = new User();
+            user.Password = "password";
+            user.Email = "user@user.com";
+            user.DateCreated = DateTime.Parse("06-01-2021");
+            user.Username = "user";
+            repo.Add(user);
+
+            User userUp = user;
+            userUp.Username = "userUp";
+
+            Response response = repo.Edit(userUp);
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual("userUp", user.Username);
         }
 
         //test delete
