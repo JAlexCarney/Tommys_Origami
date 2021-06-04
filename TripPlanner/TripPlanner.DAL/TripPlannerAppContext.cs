@@ -11,7 +11,7 @@ namespace TripPlanner.DAL
     public class TripPlannerAppContext : DbContext
     {
         public DbSet<Destination> Destination { get; set; }
-        public DbSet<DestinationTrip> TripDestination { get; set; }
+        public DbSet<DestinationTrip> DestinationTrip { get; set; }
         public DbSet<Review> Review { get; set; }
         public DbSet<Trip> Trip { get; set; }
         public DbSet<User> User { get; set; }

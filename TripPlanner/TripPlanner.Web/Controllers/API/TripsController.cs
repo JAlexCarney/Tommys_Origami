@@ -85,7 +85,7 @@ namespace TripPlanner.Web.Controllers.API
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult RemoveUser(int id)
+        public IActionResult RemoveTrip(int id)
         {
             if (!_tripRepository.Get(id).Success)
             {

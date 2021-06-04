@@ -123,12 +123,12 @@ namespace TripPlanner.DAL.Repos
                 {
                     foreach (Trip trip in tripsToRemove)
                     {
-                        var destinationTripsToRemove = _context.TripDestination.Where(dt => dt.TripID == trip.TripID);
+                        var destinationTripsToRemove = _context.DestinationTrip.Where(dt => dt.TripID == trip.TripID);
                         if (destinationTripsToRemove.Any())
                         {
                             foreach (DestinationTrip destinationTrip in destinationTripsToRemove)
                             {
-                                _context.TripDestination.Remove(destinationTrip);
+                                _context.DestinationTrip.Remove(destinationTrip);
                                 _context.SaveChanges();
                             }
                         }

@@ -148,3 +148,5 @@ insert into Review (DestinationID, UserID, Description, Rating) values (15, '2ac
 insert into Review (DestinationID, UserID, Description, Rating) values (5, '2ac1a40d-a606-48e9-a807-09cfa0facc0a', 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.', 4.1);
 insert into Review (DestinationID, UserID, Description, Rating) values (12, '3b8ba126-f1d3-4f28-bab7-4ac8e5d8f692', 'Fusce consequat.', 1.8);
 insert into Review (DestinationID, UserID, Description, Rating) values (7, '25f160d5-d3c6-4944-b3e5-a8d6d29831c8', 'Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', 3.4);
+
+

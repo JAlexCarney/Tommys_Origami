@@ -18,7 +18,7 @@ namespace TripPlanner.Core.Entities
         public string Country { get; set; }
 
         // Navigation Properties
-        public List<Trip> Trips { get; set; }
+        public List<DestinationTrip> DestinationTrips { get; set; }
         public List<Review> Reviews { get; set; }
     }
 }

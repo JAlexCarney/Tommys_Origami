@@ -16,10 +16,10 @@ namespace TripPlanner.Core.Entities
         public DateTime StartDate { get; set; }
         public DateTime ProjectedEndDate { get; set; }
         public DateTime? ActualEndDate { get; set; }
-        public bool Booked { get; set; }
+        public bool IsBooked { get; set; }
 
         // Navigation Properties
-        public List<Destination> Destinations { get; set; }
+        public List<DestinationTrip> DestinationTrips { get; set; }
         public User User { get; set; }
     }
 }

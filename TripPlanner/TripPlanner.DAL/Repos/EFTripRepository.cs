@@ -71,7 +71,7 @@ namespace TripPlanner.DAL.Repos
                 editing.StartDate = trip.StartDate;
                 editing.ProjectedEndDate = trip.ProjectedEndDate;
                 editing.ActualEndDate = trip.ActualEndDate;
-                editing.Booked = trip.Booked;
+                editing.IsBooked = trip.IsBooked;
                 _context.SaveChanges();
 
             }
@@ -92,6 +92,11 @@ namespace TripPlanner.DAL.Repos
             try
             {
                 found = _context.Trip.Find(tripID);
+                if (found == null) 
+                {
+                    response.Message = $"Trip with id {tripID} not found";
+                    return response;
+                }
             }
             catch (Exception ex)
             {
@@ -117,6 +122,11 @@ namespace TripPlanner.DAL.Repos
                         found.Add(t);
                     }
                 }
+                if (!found.Any())
+                {
+                    response.Message = $"That User has no trips";
+                    return response;
+                }
             }
             catch (Exception ex)
             {
@@ -141,12 +151,12 @@ namespace TripPlanner.DAL.Repos
                     response.Message = "Failed to find Trip with given Id";
                     return response;
                 }
-                var destinationTripsToRemove = _context.TripDestination.Where(dt => dt.TripID == tripID);
+                var destinationTripsToRemove = _context.DestinationTrip.Where(dt => dt.TripID == tripID);
                 if (destinationTripsToRemove.Any())
                 {
                     foreach (DestinationTrip destinationTrip in destinationTripsToRemove)
                     {
-                        _context.TripDestination.Remove(destinationTrip);
+                        _context.DestinationTrip.Remove(destinationTrip);
                         _context.SaveChanges();
                     }
                 }
