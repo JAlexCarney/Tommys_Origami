@@ -32,6 +32,7 @@ namespace TripPlanner.DAL
             //    );
             modelBuilder.Entity<DestinationTrip>().HasKey(aa => new { aa.DestinationID, aa.TripID });
             modelBuilder.Entity<Review>().HasKey(aa => new { aa.DestinationID, aa.UserID });
+            modelBuilder.Entity<User>().HasMany(u => u.Trips).WithOne(t => t.User);
             /*
             modelBuilder.Entity<Destination>().HasMany<Review>();
             modelBuilder.Entity<DestinationTrip>().HasOne<Destination>(); //needed?
