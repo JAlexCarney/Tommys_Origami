@@ -1,0 +1,40 @@
+﻿@model List<TripPlanner.Core.Entities.Destination>
+
+<html>
+<head>
+    <title>Destination Manager</title>
+</head>
+<body>
+    <h1>Destination Manager</h1>
+    <p>
+        <a asp-action="Add">Add New Destination</a>
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>City.</th>
+                <th>State/Province</th>
+                <th>Country</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var destination in Model)
+            {
+            <tr>
+                <td>@destination.DestinationID</td>
+                <td>@destination.City</td>
+                <td>@destination.StateProvince</td>
+                <td>@destination.Country</td>
+                <td>
+                    <a asp-controller="Destinations" asp-action="Edit" asp-route-id="@destination.DestinationID">Edit</a> |
+                    <a asp-controller="Destinations" asp-action="Remove" asp-route-id="@destination.DestinationID">Remove</a>
+
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
