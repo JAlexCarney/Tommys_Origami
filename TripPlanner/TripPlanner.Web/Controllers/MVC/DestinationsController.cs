@@ -46,24 +46,6 @@ namespace TripPlanner.Web.Controllers.MVC
             return BadRequest(result.Message);
         }
 
-        /*
-        [HttpPost]
-        public IActionResult AddDestination(Destination destination)
-        {
-            if (ModelState.IsValid)
-            {
-                Response<Destination> result = _destinationRepository.Add(destination);
-
-                if (result.Success)
-                {
-                    return CreatedAtRoute(nameof(GetDestination), new { id = result.Data.DestinationID }, destination);
-                }
-                return BadRequest(result.Message);
-            }
-            return BadRequest(ModelState);
-        }
-        */
-
         // need / before?
         [Route("add")]
         [HttpGet]
