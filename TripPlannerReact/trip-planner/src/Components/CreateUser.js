@@ -17,6 +17,7 @@ let CreateUser = () => {
         let newUser = {...user};
         console.log(newUser);
         newUser["dateCreated"] = today;
+        delete newUser["confirmPassword"];
         setUser(newUser);
         const init = {
             method: "POST",
@@ -37,27 +38,31 @@ let CreateUser = () => {
             .catch(console.log);
     }
     return(
-    <div>
-        <form onSubmit={onSubmit} className="form-group">
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" onChange={handleChange}/>
-            </div>
-            <div>
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" onChange={handleChange}/>
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" onChange={handleChange}/>
-            </div>
-            {/* <div>
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" onChange={handleChange}/>
-            </div> */}
-            
-            <button type="submit">Submit</button>
-        </form>
+    <div className="row">
+        <div className="col col-4"></div>
+        <div className="col col-4">
+            <form onSubmit={onSubmit} className="form-group">
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" onChange={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" onChange={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" onChange={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" onChange={handleChange}/>
+                </div>
+                
+                <button className="btn btn-primary btn-submit" type="submit">Submit</button>
+            </form>
+        </div>
+        <div className="col col-4"></div>
     </div>
     );
 }

@@ -1,0 +1,23 @@
+label {
+    font-size: larger;
+    padding-top: 10px;
+    width: 100%;
+}
+  
+input {
+    border-radius: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    width: 75%;
+}
+
+form {
+    text-align: center;
+}
+
+.btn-submit {
+    margin-top: 20px;
+    font-size: larger;
+    border-radius: 20px;
+}
