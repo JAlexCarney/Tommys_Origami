@@ -60,6 +60,8 @@ namespace TripPlanner.DAL.Tests
             Assert.AreEqual("description", response.Data.Description);
         }
 
+        //should not add w/o tests - w/o destinationid/tripid
+
         [Test]
         public void ShouldEditDestinationTrip()
         {
@@ -75,17 +77,30 @@ namespace TripPlanner.DAL.Tests
             Assert.AreEqual("description", expected.Description);
         }
 
+        //able to edit destination ids/tripids ? tests needed ?
+
         [Test]
         public void ShouldGetDestinationTrip()
         {
             DestinationTrip expected = MakeDestinationTrip();
             Response<DestinationTrip> addedResponse = repo.Add(expected);
 
-            Response<DestinationTrip> response = repo.Get(addedResponse.Data.DestinationID, addedResponse.Data.TripID);
+            Response<DestinationTrip> response = repo.Get(expected.DestinationID, expected.TripID);
 
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.Data);
             Assert.AreEqual(expected, response.Data);
+        }
+
+        [Test]
+        public void ShouldNotGetDestinationTrip()
+        {
+            DestinationTrip expected = MakeDestinationTrip();
+
+            Response<DestinationTrip> response = repo.Get(expected.DestinationID, expected.TripID);
+
+            Assert.IsFalse(response.Success);
+            Assert.Null(response.Data);
         }
 
         [Test]
