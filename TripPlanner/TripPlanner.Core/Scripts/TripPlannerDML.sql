@@ -5,6 +5,7 @@ insert into [User] (UserID, Username, Password, Email, DateCreated) values ('3b8
 insert into [User] (UserID, Username, Password, Email, DateCreated) values ('25f160d5-d3c6-4944-b3e5-a8d6d29831c8', 'geakley2', 'iXNMVwHBH', 'rbarwack2@usda.gov', '04/21/2019');
 insert into [User] (UserID, Username, Password, Email, DateCreated) values ('cb1840d7-2fda-4420-b133-2b687394afa3', 'pivanishev3', 'SG23yt', 'sayscough3@topsy.com', '01/02/2019');
 insert into [User] (UserID, Username, Password, Email, DateCreated) values ('2ac1a40d-a606-48e9-a807-09cfa0facc0a', 'mnoke4', 'LCvQEzzs', 'bbussen4@nytimes.com', '01/04/2020');
+insert into [User] (UserID, Username, Password, Email, DateCreated) values ('7da6321d-046d-4dd6-9f7b-31e2816cd912', 'admin', 'admin123', 'example@email.com', '06/04/2021');
 
 insert into Destination (City, StateProvince, Country) values ('Fort Lauderdale', 'Florida', 'United States');
 insert into Destination (City, StateProvince, Country) values ('Atlanta', 'Georgia', 'United States');
