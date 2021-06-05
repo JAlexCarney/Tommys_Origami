@@ -74,7 +74,7 @@ namespace TripPlanner.DAL.Tests
             Response response = repo.Edit(updated);
 
             Assert.IsTrue(response.Success);
-            Assert.AreEqual("description", expected.Description);
+            Assert.AreEqual("updated", expected.Description);
         }
 
         //able to edit destination ids/tripids ? tests needed ?

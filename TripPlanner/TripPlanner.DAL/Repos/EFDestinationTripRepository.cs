@@ -63,7 +63,7 @@ namespace TripPlanner.DAL.Repos
                     && dt.TripID == destinationTrip.TripID);
                 if (editing == null)
                 {
-                    response.Message = "Failed to find DestinationTrip with given Id";
+                    response.Message = "Failed to find DestinationTrip with given Ids";
                     return response;
                 }
                 editing.Description = destinationTrip.Description;
@@ -86,6 +86,10 @@ namespace TripPlanner.DAL.Repos
                 found = _context.DestinationTrip.FirstOrDefault(dt =>
                     dt.DestinationID == destinationID
                     && dt.TripID == tripID);
+                if (found == null) 
+                {
+                    response.Message = "Failed to find DestinationTrip with given Ids";
+                }
             }
             catch (Exception ex)
             {
