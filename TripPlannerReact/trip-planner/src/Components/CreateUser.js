@@ -39,8 +39,7 @@ let CreateUser = (props) => {
     }
     return(
     <div className="row">
-        <div className="col col-4"></div>
-        <div className="col col-4">
+        <div className="col">
             <form onSubmit={onSubmit} className="form-group">
                 <div>
                     <label htmlFor="email">Email</label>
@@ -60,10 +59,9 @@ let CreateUser = (props) => {
                 </div>
                 
                 <button className="btn btn-primary btn-submit" type="submit">Submit</button><br/>
-                <button className="btn btn-secondary btn-submit" type="button" onClick={() => {props.changePage("CreateUser")}}>Create User</button>
+                <button className="btn btn-secondary btn-submit" type="button" onClick={() => {props.changePage("LoginPage")}}>Cancel</button>
             </form>
         </div>
-        <div className="col col-4"></div>
     </div>
     );
 }

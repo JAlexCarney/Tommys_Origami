@@ -10,14 +10,17 @@ let TripPlanner = () => {
         setState(page);
     }
     function GetToken(newToken){
-        console.log(newToken);
         setToken(newToken);
     }
     switch(state){
         case "LoginPage":
-            return <Login changePage={ChangePage} getToken={GetToken}/>;
+            return <div className="container d-flex align-items-center justify-content-center login-container">
+                        <Login changePage={ChangePage} getToken={GetToken}/>
+                    </div>;
         case "CreateUser":
-            return <CreateUser />;
+            return <div className="container d-flex align-items-center justify-content-center login-container">
+                        <CreateUser changePage={ChangePage} />
+                    </div>;
     }
 }
 

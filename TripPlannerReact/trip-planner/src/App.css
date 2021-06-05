@@ -21,3 +21,11 @@ form {
     font-size: larger;
     border-radius: 20px;
 }
+
+.login-container {
+    background-image: url("./imgs/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+}
