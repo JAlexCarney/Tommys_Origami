@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-let CreateUser = () => {
+let CreateUser = (props) => {
     const [user, setUser] = useState({});
     let handleChange = (event) => {
         let newUser = {...user};
@@ -59,7 +59,8 @@ let CreateUser = () => {
                     <input type="password" name="confirmPassword" onChange={handleChange}/>
                 </div>
                 
-                <button className="btn btn-primary btn-submit" type="submit">Submit</button>
+                <button className="btn btn-primary btn-submit" type="submit">Submit</button><br/>
+                <button className="btn btn-secondary btn-submit" type="button" onClick={() => {props.changePage("CreateUser")}}>Create User</button>
             </form>
         </div>
         <div className="col col-4"></div>
