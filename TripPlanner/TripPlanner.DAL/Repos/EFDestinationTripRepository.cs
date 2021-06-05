@@ -128,6 +128,8 @@ namespace TripPlanner.DAL.Repos
                     response.Message = "Failed to find DestinationTrip with given Id";
                     return response;
                 }
+                _context.DestinationTrip.Remove(toRemove);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
