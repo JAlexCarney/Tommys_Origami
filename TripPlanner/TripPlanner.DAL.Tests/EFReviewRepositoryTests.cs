@@ -148,6 +148,7 @@ namespace TripPlanner.DAL.Tests
             Assert.AreEqual(2, result.Data.Count);
         }
 
+        /*
         [Test]
         public void ShouldNotGetReviewsByDestination()
         {
@@ -156,6 +157,7 @@ namespace TripPlanner.DAL.Tests
             Assert.IsFalse(result.Success);
             Assert.IsNull(result.Data);
         }
+        */
 
         [Test]
         public void ShouldGetReviewsByUser()
@@ -178,6 +180,7 @@ namespace TripPlanner.DAL.Tests
             Assert.AreEqual(2, result.Data.Count);
         }
 
+        /*
         [Test]
         public void ShouldNotGetReviewsByUser()
         {
@@ -186,6 +189,7 @@ namespace TripPlanner.DAL.Tests
             Assert.IsFalse(result.Success);
             Assert.IsNull(result.Data);
         }
+        */
 
         [Test]
         public void ShouldEditReview()

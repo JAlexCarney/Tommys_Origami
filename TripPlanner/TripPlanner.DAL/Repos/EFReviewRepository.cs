@@ -190,6 +190,14 @@ namespace TripPlanner.DAL.Repos
             {
                 response.Message = "Rating is required";
             }
+            else if (review.Rating < 0)
+            {
+                response.Message = "Rating cannot be negative";
+            }
+            else if (review.Rating > 5)
+            {
+                response.Message = "Rating cannot be above 5.0";
+            }
             return response;
         }
     }
