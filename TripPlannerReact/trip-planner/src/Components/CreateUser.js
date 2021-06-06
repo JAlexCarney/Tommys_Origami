@@ -36,6 +36,7 @@ let CreateUser = (props) => {
             })
             .then()
             .catch(console.log);
+        props.changePage("LoginPage");
     }
     return(
     <div className="row">
@@ -59,7 +60,7 @@ let CreateUser = (props) => {
                 </div>
                 
                 <button className="btn btn-primary btn-submit" type="submit">Submit</button><br/>
-                <button className="btn btn-secondary btn-submit" type="button" onClick={() => {props.changePage("LoginPage")}}>Cancel</button>
+                <button className="btn btn-secondary btn-submit" type="button" onClick={() => {props.changePage("Login")}}>Cancel</button>
             </form>
         </div>
     </div>

@@ -9,6 +9,7 @@ let Login = (props) => {
         setLoginModel(newLoginModel);
     }
     let onSubmit = (event) => {
+        console.log("Hello?");
         event.preventDefault();
         const init = {
             method: "POST",
@@ -25,9 +26,11 @@ let Login = (props) => {
                 }
                 return response.json();
             })
-            .then(json => props.getToken(json.token))
+            .then((json) => {
+                console.log();
+                props.setTokenAndUserID(json.token, json.userID);
+            })
             .catch(console.log);
-    
     }
     return (
         <div className="row">
