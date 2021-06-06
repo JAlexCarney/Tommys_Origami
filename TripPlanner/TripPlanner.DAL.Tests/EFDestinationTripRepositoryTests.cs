@@ -24,7 +24,7 @@ namespace TripPlanner.DAL.Tests
             _tripPlannerAppContext = GetInMemoryDBContext();
             _tripPlannerAppContext.Database.EnsureDeleted();
             _tripPlannerAppContext.Database.EnsureCreated();
-            //repo = new EFDestinationTripRepository(_tripPlannerAppContext);
+            repo = new EFDestinationTripRepository(_tripPlannerAppContext);
         }
 
         private static TripPlannerAppContext GetInMemoryDBContext()
