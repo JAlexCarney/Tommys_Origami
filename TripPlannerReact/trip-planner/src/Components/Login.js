@@ -35,6 +35,7 @@ let Login = (props) => {
     return (
         <div className="row">
             <div className="col">
+            <h1 className="logo">TRIP PLANNER</h1>
             <form onSubmit={onSubmit} className="form-group" id="login">
                 <div>
                     <label htmlFor="identifier" >Email/Username</label>
@@ -45,7 +46,7 @@ let Login = (props) => {
                     <input type="password" name="password" onChange={handleChange}/>
                 </div>
                 <button className="btn btn-primary btn-submit" type="submit" >Login</button><br/>
-                <button className="btn btn-secondary btn-submit" type="button" onClick={() => {props.changePage("CreateUser")}}>Create User</button>
+                <button className="btn btn-secondary btn-create-account" type="button" onClick={() => {props.changePage("CreateUser")}}>Create Account</button>
             </form>
             </div>
         </div>

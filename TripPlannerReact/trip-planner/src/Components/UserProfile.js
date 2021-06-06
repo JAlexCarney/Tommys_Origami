@@ -1,34 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import TripsContainer from './Trips/TripsContainer';
 
 let UserProfile = (props) => {
-    const [trips, setTrips] = useState([]);
-
-    useEffect(() => {
-        const init = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                //"Authorization": "Bearer " + props.token
-            }
-        };
-        console.log(props.userID);
-        fetch("https://localhost:44365/api/trips/byuser/25f160d5-d3c6-4944-b3e5-a8d6d29831c8" /*+ props.userID*/, init)
-            .then(response => {
-                if (response.status !== 200) {
-                    return Promise.reject("trips fetch failed")
-                }
-                return response.json();
-            })
-            .then(json => {setTrips(json)})
-            .catch(console.log);
-    }, [props.token]);
-
-    console.log(trips);
-
+    
     return (
-        <div className="row">
-            Hello
+        <div>
+            <header>
+            <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 my-navbar">
+            <div className="container">
+                <div className="row">
+                <div className="col col-5">
+                    <span className="navbar-brand">TRIP PLANNER</span>
+                </div>
+                <div className="col">
+                    <button className="btn btn-primary" onClick={() => {props.changePage("Login");}}>Log out</button>
+                    <button className="btn btn-primary" onClick={() => {props.changePage("Login");}}>Edit Account</button>
+                </div>
+                </div>
+            </div>
+            </nav>
+            </header>
+            <TripsContainer userID={props.userID} token={props.token}/>
         </div>
     );
 }

@@ -28,17 +28,15 @@ let TripPlanner = () => {
 
     switch(state.page){
         case "Login":
-            return <div className="container d-flex align-items-center justify-content-center login-container">
+            return <div className="container-flex d-flex align-items-center justify-content-center login-container">
                         <Login changePage={ChangePage} setTokenAndUserID={SetTokenAndUserID}/>
                     </div>;
         case "CreateUser":
-            return <div className="container d-flex align-items-center justify-content-center login-container">
+            return <div className="container-flex d-flex align-items-center justify-content-center login-container">
                         <CreateUser changePage={ChangePage} />
                     </div>;
         case "UserProfile":
-            return <div className="container-flex d-flex align-items-center justify-content-center profile-container">
-                        <UserProfile changePage={ChangePage} token={state.token} userID={state.userID}/>
-                    </div>;
+            return <UserProfile changePage={ChangePage} token={state.token} userID={state.userID}/>;
     }
 }
 
