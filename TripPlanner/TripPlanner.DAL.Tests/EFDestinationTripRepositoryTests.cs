@@ -24,7 +24,7 @@ namespace TripPlanner.DAL.Tests
             _tripPlannerAppContext = GetInMemoryDBContext();
             _tripPlannerAppContext.Database.EnsureDeleted();
             _tripPlannerAppContext.Database.EnsureCreated();
-            repo = new EFDestinationTripRepository(_tripPlannerAppContext);
+            //repo = new EFDestinationTripRepository(_tripPlannerAppContext);
         }
 
         private static TripPlannerAppContext GetInMemoryDBContext()
@@ -61,6 +61,31 @@ namespace TripPlanner.DAL.Tests
         }
 
         //should not add w/o tests - w/o destinationid/tripid
+        [Test]
+        public void ShouldNotAddDestinationTripWODestinationID()
+        {
+            DestinationTrip expected = MakeDestinationTrip();
+            expected.DestinationID = 0;
+
+            Response<DestinationTrip> response = repo.Add(expected);
+
+            Assert.IsFalse(response.Success);
+            Assert.Null(response.Data);
+            Assert.AreEqual("DestinationID is required", response.Message); //check exact message
+        }
+
+        [Test]
+        public void ShouldNotAddDestinationTripWOTripID()
+        {
+            DestinationTrip expected = MakeDestinationTrip();
+            expected.TripID = 0;
+
+            Response<DestinationTrip> response = repo.Add(expected);
+
+            Assert.IsFalse(response.Success);
+            Assert.Null(response.Data);
+            Assert.AreEqual("TripID is required", response.Message); //check exact message
+        }
 
         [Test]
         public void ShouldEditDestinationTrip()
@@ -78,6 +103,21 @@ namespace TripPlanner.DAL.Tests
         }
 
         //able to edit destination ids/tripids ? tests needed ?
+
+        [Test]
+        public void ShouldNotEditDestinationTripDestinationID()
+        {
+            DestinationTrip expected = MakeDestinationTrip();
+            repo.Add(expected);
+
+            DestinationTrip updated = expected;
+            updated.DestinationID = 2;
+
+            Response response = repo.Edit(updated);
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual("Cannot edit DestinationID", response.Message);
+        }
 
         [Test]
         public void ShouldGetDestinationTrip()

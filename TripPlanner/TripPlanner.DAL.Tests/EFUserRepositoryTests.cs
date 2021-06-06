@@ -199,6 +199,39 @@ namespace TripPlanner.DAL.Tests
             //Assert.AreEqual(user, response.Data);
         }
 
+        //test get all
+        [Test]
+        public void ShouldGetAllUsers()
+        {
+            User user1 = new User();
+            user1.Password = "password1";
+            user1.Email = "user1@user.com";
+            user1.DateCreated = DateTime.Parse("06-01-2021");
+            repo.Add(user1);
+
+            User user2 = new User();
+            user2.Password = "password2";
+            user2.Email = "user2@user.com";
+            user2.DateCreated = DateTime.Parse("06-04-2021");
+            repo.Add(user2);
+
+            Response<List<User>> response = repo.GetAll();
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(2, response.Data.Count);
+            Assert.AreEqual(user1, response.Data[0]);
+            Assert.AreEqual(user2, response.Data[1]);
+        }
+
+        [Test]
+        public void ShouldNotGetAllUsers()
+        {
+            Response<List<User>> response = repo.GetAll();
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual("Could not find any users", response.Message);
+        }
+
     }
 }
 
