@@ -63,7 +63,7 @@ namespace TripPlanner.DAL.Repos
                     && dt.TripID == destinationTrip.TripID);
                 if (editing == null)
                 {
-                    response.Message = "Failed to find DestinationTrip with given Ids";
+                    response.Message = "Please input a valid, existing Destionation/Trip ID combo";
                     return response;
                 }
                 editing.Description = destinationTrip.Description;
@@ -156,5 +156,6 @@ namespace TripPlanner.DAL.Repos
             }
             return response;
         }
+
     }
 }

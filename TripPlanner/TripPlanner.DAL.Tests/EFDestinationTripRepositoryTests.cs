@@ -24,7 +24,7 @@ namespace TripPlanner.DAL.Tests
             _tripPlannerAppContext = GetInMemoryDBContext();
             _tripPlannerAppContext.Database.EnsureDeleted();
             _tripPlannerAppContext.Database.EnsureCreated();
-            //repo = new EFDestinationTripRepository(_tripPlannerAppContext);
+            repo = new EFDestinationTripRepository(_tripPlannerAppContext);
         }
 
         private static TripPlannerAppContext GetInMemoryDBContext()
@@ -71,7 +71,7 @@ namespace TripPlanner.DAL.Tests
 
             Assert.IsFalse(response.Success);
             Assert.Null(response.Data);
-            Assert.AreEqual("DestinationID is required", response.Message); //check exact message
+            Assert.AreEqual("Destination is required", response.Message); //check exact message
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace TripPlanner.DAL.Tests
             Response response = repo.Edit(updated);
 
             Assert.IsFalse(response.Success);
-            Assert.AreEqual("Cannot edit DestinationID", response.Message);
+            Assert.AreEqual("Please input a valid, existing Destionation/Trip ID combo", response.Message);
         }
 
         [Test]
