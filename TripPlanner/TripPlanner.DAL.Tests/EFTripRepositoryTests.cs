@@ -346,13 +346,5 @@ namespace TripPlanner.DAL.Tests
             Assert.IsTrue(trips.Success);
             Assert.AreEqual(2, trips.Data.Count);
         }
-
-        [Test]
-        public void ShouldNotGetTripByUserIdIfDoesNotExist()
-        {
-            Response<List<Trip>> trips = tripRepo.GetByUser(Guid.Parse("d1f20446-cf7d-495d-8151-7a3fe68eb153"));
-            Assert.IsFalse(trips.Success);
-        }
-
     }
 }

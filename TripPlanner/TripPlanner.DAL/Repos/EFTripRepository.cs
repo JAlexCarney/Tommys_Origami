@@ -46,8 +46,6 @@ namespace TripPlanner.DAL.Repos
             }
             response.Data = added;
             return response;
-
-            //throw new NotImplementedException();
         }
 
         public Response Edit(Trip trip)
@@ -82,7 +80,6 @@ namespace TripPlanner.DAL.Repos
             }
 
             return response;
-            //throw new NotImplementedException();
         }
 
         public Response<Trip> Get(int tripID)
@@ -105,7 +102,6 @@ namespace TripPlanner.DAL.Repos
             }
             response.Data = found;
             return response;
-            //throw new NotImplementedException();
         }
 
         public Response<List<Trip>> GetByUser(Guid userID)
@@ -122,11 +118,6 @@ namespace TripPlanner.DAL.Repos
                         found.Add(t);
                     }
                 }
-                if (!found.Any())
-                {
-                    response.Message = $"That User has no trips";
-                    return response;
-                }
             }
             catch (Exception ex)
             {
@@ -136,7 +127,6 @@ namespace TripPlanner.DAL.Repos
 
             response.Data = found;
             return response;
-            //throw new NotImplementedException();
         }
 
         public Response Remove(int tripID)
@@ -169,7 +159,6 @@ namespace TripPlanner.DAL.Repos
                 return response;
             }
             return response;
-            //throw new NotImplementedException();
         }
 
         private static Response IsValidAdd(Trip trip)

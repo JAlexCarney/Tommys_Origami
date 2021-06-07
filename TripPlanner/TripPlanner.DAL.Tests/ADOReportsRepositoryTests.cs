@@ -20,7 +20,7 @@ namespace TripPlanner.DAL.Tests
         public void Setup()
         {
             string connectionString = "Server=localhost;Database=TripPlanner;User Id=sa;Password=YOUR_strong_*pass4w0rd*";
-            repo = new ADOReportsRepository(connectionString);
+            //repo = new ADOReportsRepository(connectionString);
         }
 
         [Test]
