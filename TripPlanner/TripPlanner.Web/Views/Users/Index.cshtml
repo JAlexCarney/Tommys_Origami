@@ -1,0 +1,39 @@
+﻿@model List<TripPlanner.Core.Entities.User>
+
+<html>
+<head>
+    <title>User Manager</title>
+</head>
+<body>
+    <h1>User Manager</h1>
+    <div class="row">
+        <a asp-controller="Users" asp-action="Add" method="get" class="btn btn-primary">Add New User</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserID</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.DateCreated</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Users" asp-action="Edit" asp-route-id="@user.UserID">Edit</a> |
+                        <a class="btn btn-danger" asp-controller="Users" asp-action="Remove" asp-route-id="@user.UserID">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
