@@ -148,17 +148,6 @@ namespace TripPlanner.DAL.Tests
             Assert.AreEqual(2, result.Data.Count);
         }
 
-        /*
-        [Test]
-        public void ShouldNotGetReviewsByDestination()
-        {
-            Response<List<Review>> result = repo.GetByDestination(3);
-
-            Assert.IsFalse(result.Success);
-            Assert.IsNull(result.Data);
-        }
-        */
-
         [Test]
         public void ShouldGetReviewsByUser()
         {
@@ -179,17 +168,6 @@ namespace TripPlanner.DAL.Tests
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(2, result.Data.Count);
         }
-
-        /*
-        [Test]
-        public void ShouldNotGetReviewsByUser()
-        {
-            Response<List<Review>> result = repo.GetByUser(Guid.Parse("2ac1a40d-a606-48e9-a807-09cfa0facc0a"));
-
-            Assert.IsFalse(result.Success);
-            Assert.IsNull(result.Data);
-        }
-        */
 
         [Test]
         public void ShouldEditReview()
@@ -216,6 +194,34 @@ namespace TripPlanner.DAL.Tests
             repo.Add(review);
             Review editReview = MakeReview();
             editReview.Description = null;
+
+            Response result = repo.Edit(editReview);
+
+            Assert.IsFalse(result.Success);
+        }
+
+        [Test]
+        public void ShouldNotEditReviewIfRatingIsAboveFive()
+        {
+            Review review = MakeReview();
+
+            repo.Add(review);
+            Review editReview = MakeReview();
+            editReview.Rating = 6.0M;
+
+            Response result = repo.Edit(editReview);
+
+            Assert.IsFalse(result.Success);
+        }
+
+        [Test]
+        public void ShouldNotEditReviewIfRatingIsBelowZero()
+        {
+            Review review = MakeReview();
+
+            repo.Add(review);
+            Review editReview = MakeReview();
+            editReview.Rating = -1.0M;
 
             Response result = repo.Edit(editReview);
 
