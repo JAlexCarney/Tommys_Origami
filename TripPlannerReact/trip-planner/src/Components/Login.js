@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import ErrorMessage from './ErrorMessage';
 
 let Login = (props) => {
     const [loginModel, setLoginModel] = useState({});
+    const [error, setError] = useState("");
 
     let handleChange = (event) => {
         let newLoginModel = {...loginModel};
@@ -9,8 +11,17 @@ let Login = (props) => {
         setLoginModel(newLoginModel);
     }
     let onSubmit = (event) => {
-        console.log("Hello?");
         event.preventDefault();
+        if(loginModel.identifier === undefined || loginModel.identifier === "")
+        {
+            setError("Username or Email is required");
+            return;
+        }
+        else if(loginModel.password === undefined || loginModel.password === "")
+        {
+            setError("Password is required");
+            return;
+        }
         const init = {
             method: "POST",
             headers: {
@@ -22,12 +33,12 @@ let Login = (props) => {
         fetch("https://localhost:44365/api/auth/login", init)
             .then(response => {
                 if(response.status !== 200){
-                    return Promise.reject("Was not able to login.")
+                    setError("Username or Password are incorrect");
+                    return Promise.reject("Was not able to login.");
                 }
                 return response.json();
             })
             .then((json) => {
-                console.log();
                 props.setTokenAndUserID(json.token, json.userID);
             })
             .catch(console.log);
@@ -45,6 +56,7 @@ let Login = (props) => {
                     <label htmlFor="password" >Password</label>
                     <input type="password" name="password" onChange={handleChange}/>
                 </div>
+                <ErrorMessage message={error}/>
                 <button className="btn btn-primary btn-submit" type="submit" >Login</button><br/>
                 <button className="btn btn-secondary btn-create-account" type="button" onClick={() => {props.changePage("CreateUser")}}>Create Account</button>
             </form>

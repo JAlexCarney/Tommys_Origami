@@ -6,6 +6,7 @@
     background-image: url("./../imgs/windmill.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    width: 100%;
 }
 
 .trips-tr:nth-child(odd) {

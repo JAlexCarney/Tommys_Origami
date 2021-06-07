@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Login from './Login';
-import CreateUser from './CreateUser';
-import UserProfile from './UserProfile';
+import CreateUser from './Users/CreateUser';
+import EditUser from './Users/EditUser';
+import UserProfile from './Users/UserProfile';
 
 let TripPlanner = () => {
     const [state, setState] = useState(
@@ -21,22 +22,27 @@ let TripPlanner = () => {
         newState.token = token;
         newState.userID = userID;
         newState.page = "UserProfile";
-        console.log(newState.token);
-        console.log(newState.userID);
         setState(newState);
     }
 
     switch(state.page){
-        case "Login":
-            return <div className="container-flex d-flex align-items-center justify-content-center login-container">
-                        <Login changePage={ChangePage} setTokenAndUserID={SetTokenAndUserID}/>
-                    </div>;
+        
         case "CreateUser":
             return <div className="container-flex d-flex align-items-center justify-content-center login-container">
                         <CreateUser changePage={ChangePage} />
                     </div>;
+        case "EditUser":
+            return <div className="container-flex d-flex align-items-center justify-content-center login-container">
+                        <EditUser changePage={ChangePage} token={state.token} userID={state.userID}/>
+                    </div>;
         case "UserProfile":
             return <UserProfile changePage={ChangePage} token={state.token} userID={state.userID}/>;
+        
+        case "Login":
+        default:
+            return <div className="container-flex d-flex align-items-center justify-content-center login-container">
+                        <Login changePage={ChangePage} setTokenAndUserID={SetTokenAndUserID}/>
+                    </div>;
     }
 }
 
