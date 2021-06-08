@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+
 let Component = (props) => 
 {
     const [state, setState] = useState({});
@@ -35,7 +37,18 @@ let Component = (props) =>
             </div>
             <div className="form-field">
                 <label htmlFor="rating">Rating</label>
-                <input type="radio" name="rating" onChange={handleChange}></input>
+                <div class="wrapper">
+                    <input name="ratingRadio" type="radio" id="st1" value="1" />
+                    <label for="st1"></label>
+                    <input name="ratingRadio" type="radio" id="st2" value="2" />
+                    <label for="st2"></label>
+                    <input name="ratingRadio" type="radio" id="st3" value="3" />
+                    <label for="st3"></label>
+                    <input name="ratingRadio" type="radio" id="st4" value="4" />
+                    <label for="st4"></label>
+                    <input name="ratingRadio" type="radio" id="st5" value="5" />
+                    <label for="st5"></label>
+                </div>
             </div>
             <div className="form-field">
                 <label htmlFor="description">Description</label>

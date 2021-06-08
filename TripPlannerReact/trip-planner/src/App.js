@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import './css/TripsTable.css';
+import './css/ReviewsTable.css';
 import TripPlanner from './Components/TripPlanner';
 import DestinationTrip from './Components/DestinationTrip/DestinationTrip';
 
