@@ -72,11 +72,42 @@ let UserProfile = (props) => {
     }
 
     let viewDeleteForm = (trip) => {
-        console.log("Deleting trip");
+        let newState = {...state};
+        newState.form = "Delete";
+        newState.action = (trip) => {
+            const init = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                }
+              };
+          
+            fetch(`https://localhost:44365/api/trips/${trip.tripID}`, init)
+                .then(response => {
+                    if (response.status === 200) {
+                        let newState = {...state};
+                        newState.list = state.list.filter(t => t.tripID  !== trip.tripID);
+                        newState.form = "";
+                        newState.action = ()=>{};
+                        newState.trip = {};
+                        setState(newState);
+                    }
+                    return Promise.reject("response is not 200 OK");
+                })
+                .catch(console.log);
+        };
+        newState.trip = trip;
+        setState(newState);
     }
 
     let viewViewForm = (trip) => {
-        console.log("Viewing trip");
+        let newState = {...state};
+        newState.form = "View";
+        newState.action = ()=>{};
+        newState.trip = trip;
+        setState(newState);
     }
 
     let exitView = () => {
@@ -100,7 +131,7 @@ let UserProfile = (props) => {
                         />
                 </div>
                 <div className="col col-6">
-                    <TripsFormSelector form={state.form} agent={state.trip} action={state.action} exitAction={exitView}/>
+                    <TripsFormSelector form={state.form} trip={state.trip} action={state.action} exitAction={exitView}/>
                 </div>
             </div>
         </div>

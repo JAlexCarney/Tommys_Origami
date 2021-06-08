@@ -43,7 +43,7 @@ let Component = (props) =>
             </div>
             <div className="form-field">
                 <label htmlFor="isBooked">Booked?</label>
-                <input type="checkbox" name="isBooked" onChange={handleCheck}></input>
+                <input type="checkbox" defaultValue={"off"} name="isBooked" onChange={handleCheck}></input>
             </div>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
