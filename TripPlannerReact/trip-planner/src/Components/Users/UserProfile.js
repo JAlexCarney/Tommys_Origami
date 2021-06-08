@@ -25,7 +25,6 @@ let UserProfile = (props) => {
             </div>
             </header>
             <TripsContainer userID={props.userID} token={props.token}/>
-            <ReviewsContainer userID={props.userID} token={props.token}/>
         </>
     );
 }
