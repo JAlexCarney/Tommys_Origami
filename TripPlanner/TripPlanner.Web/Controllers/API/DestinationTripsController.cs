@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace TripPlanner.Web.Controllers.API
         }
 
         [HttpGet(Name = "GetDestinationTripsByTrip")]
-        [Route("/api/destinationtrips/{tripID}")]
+        [Route("/api/destinationtrips/bytrip/{tripID}")]
         public IActionResult GetDestinationTripsByTrip(int tripID)
         {
             var result = _destinationTripRepository.GetByTrip(tripID);
@@ -34,7 +35,8 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpGet(Name = "GetDestinationTrip")]
+        [HttpGet(Name = "GetDestinationTrip"), Authorize]
+        [Route("get")]
         public IActionResult GetDestinationTrip(DestinationTripModel model)
         {
             if (ModelState.IsValid)
@@ -50,7 +52,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("/api/destinationtrips")]
         public IActionResult AddDestinationTrips(DestinationTrip destinationTrip)
         {
@@ -67,7 +69,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public IActionResult EditDestinationTrips(DestinationTrip destinationTrip)
         {
             if (!_destinationTripRepository.Get(destinationTrip.DestinationID, destinationTrip.TripID).Success)
@@ -88,7 +90,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         public IActionResult RemoveDestinationTrips(DestinationTripModel model)
         {
             if (!_destinationTripRepository.Get(model.DestinationID, model.TripID).Success)

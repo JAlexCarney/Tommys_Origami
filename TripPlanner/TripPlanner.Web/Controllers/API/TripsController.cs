@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace TripPlanner.Web.Controllers.API
             _tripRepository = tripRepository;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("byuser/{id}")]
         public IActionResult GetTripsByUser(Guid id)
         {
@@ -33,7 +34,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpGet(Name = "GetTrip")]
+        [HttpGet(Name = "GetTrip"), Authorize]
         [Route("{id}")]
         public IActionResult GetTrip(int id)
         {
@@ -46,7 +47,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult AddTrip(Trip trip)
         {
             if (ModelState.IsValid)
@@ -62,7 +63,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public IActionResult EditTrip(Trip trip)
         {
             if (!_tripRepository.Get(trip.TripID).Success)
@@ -83,7 +84,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("{id}")]
         public IActionResult RemoveTrip(int id)
         {
