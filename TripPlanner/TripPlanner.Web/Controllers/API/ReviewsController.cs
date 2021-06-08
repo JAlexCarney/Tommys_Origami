@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,8 @@ namespace TripPlanner.Web.Controllers.API
 
         //add, edit, remove, get, getbyuser, getbydestination
 
-        [HttpGet(Name = "GetReviewsByDestination")]
-        [Route("/api/reviews/{destinationID}")]
+        [HttpGet(Name = "GetReviewsByDestination"), Authorize]
+        [Route("/api/reviews/getreviewsbydestination/{destinationID}")]
         public IActionResult GetReviewsByDestination(int destinationID)
         {
             var result = _reviewRepository.GetByDestination(destinationID);
@@ -38,8 +39,8 @@ namespace TripPlanner.Web.Controllers.API
         }
 
 
-        [HttpGet(Name = "GetReviewsByUser")]
-        [Route("/api/reviews/{userID}")]
+        [HttpGet(Name = "GetReviewsByUser"), Authorize]
+        [Route("/api/reviews/getreviewsbyuser/{userID}")]
         public IActionResult GetReviewsByUser(Guid userID)
         {
             var result = _reviewRepository.GetByUser(userID);
@@ -51,7 +52,8 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpGet(Name = "GetReview")]
+        [HttpGet(Name = "GetReview"), Authorize]
+        [Route("/api/reviews/getreview")]
         public IActionResult GetReview(Review model)
         {
             if (ModelState.IsValid)
@@ -67,7 +69,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("/api/reviews")]
         public IActionResult AddReview(Review review)
         {
@@ -85,7 +87,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public IActionResult EditReviews(Review review )
         {
             if (!_reviewRepository.Get(review.DestinationID, review.UserID).Success)
@@ -106,7 +108,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         //check reviewmodel
         public IActionResult RemoveReviews(Review model)
         {

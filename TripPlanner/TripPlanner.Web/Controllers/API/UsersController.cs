@@ -21,7 +21,7 @@ namespace TripPlanner.Web.Controllers.API
             _userRepository = userRepository;
         }
 
-        [HttpGet(Name = "GetUser")] 
+        [HttpGet(Name = "GetUser"), Authorize] 
         [Route("{id}")]
         public IActionResult GetUser(Guid id)
         {
@@ -34,7 +34,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult AddUser(User user)
         {
             if (ModelState.IsValid)
@@ -50,7 +50,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public IActionResult EditUser(User user)
         {
             if (!_userRepository.Get(user.UserID).Success)
@@ -71,7 +71,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("{id}")]
         public IActionResult RemoveUser(Guid id)
         {

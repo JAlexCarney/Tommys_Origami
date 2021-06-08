@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace TripPlanner.Web.Controllers.API
 
         //toprated, mostvisited, mostrated
 
-        [Route("reports/toprated")]
+        [Route("reports/toprated"), Authorize]
         [HttpGet]
         public IActionResult TopRated()
         {
@@ -37,7 +38,7 @@ namespace TripPlanner.Web.Controllers.API
             }
         }
 
-        [Route("reports/mostvisited")]
+        [Route("reports/mostvisited"), Authorize]
         [HttpGet]
         public IActionResult MostVisited()
         {
@@ -53,7 +54,7 @@ namespace TripPlanner.Web.Controllers.API
             }
         }
 
-        [Route("reports/mostrated")]
+        [Route("reports/mostrated"), Authorize]
         [HttpGet]
         public IActionResult MostRated()
         {
