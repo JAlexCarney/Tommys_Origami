@@ -1,5 +1,6 @@
 import React from 'react';
 import TripsContainer from '../Trips/TripsContainer';
+import ReviewsContainer from '../Reviews/ReviewsContainer';
 
 let UserProfile = (props) => {
     
@@ -24,6 +25,7 @@ let UserProfile = (props) => {
             </div>
             </header>
             <TripsContainer userID={props.userID} token={props.token}/>
+            <ReviewsContainer userID={props.userID} token={props.token}/>
         </>
     );
 }
