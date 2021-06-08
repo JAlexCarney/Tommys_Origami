@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TripsContainer from '../Trips/TripsContainer';
 import ReviewsContainer from '../Reviews/ReviewsContainer';
+import ReportsContainer from '../Reports/ReportsContainer';
 
 let UserProfile = (props) => {
     const [state, setState] = useState({page:"trips"});
@@ -34,7 +35,7 @@ let UserProfile = (props) => {
             case "reviews":
                 return <ReviewsContainer userID={props.userID} token={props.token}/>;
             case "popular":
-                return <ReviewsContainer userID={props.userID} token={props.token}/>;
+                return <ReportsContainer token={props.token}/>;
             default:
                 return <></>;
         }
