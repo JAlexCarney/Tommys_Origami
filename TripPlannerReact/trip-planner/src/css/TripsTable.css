@@ -3,9 +3,10 @@
 }
 
 .trips-table {
+    width: 100%;
     background-image: url("./../imgs/windmill.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 
 .trips-tr:nth-child(odd) {
@@ -17,9 +18,9 @@
 }
 
 .my-navbar {
-    background-color: rgba(0, 0, 0, 0.33);;
-    padding-top:5px !important; 
-    padding-bottom:5px !important;
+    background-color: rgba(0, 0, 0, 0.33);
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }
 
 h3 {

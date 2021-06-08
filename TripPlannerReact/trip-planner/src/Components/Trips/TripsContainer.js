@@ -154,10 +154,10 @@ let UserProfile = (props) => {
         setState(newState);
     }
 
-    let tableSize="col col-6";
+    let tableSize="col col-6 trips-table-col";
     if(state.form === "")
     {
-        tableSize="col col-12";
+        tableSize="col col-12 trips-table-col";
     }
 
     return (   
