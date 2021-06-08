@@ -42,7 +42,7 @@ let Component = (props) =>
                 <label htmlFor="isBooked">Booked?</label>
                 <input type="checkbox" name="isBooked" onChange={handleCheck}></input>
             </div>
-            <DestinationTrip token={props.token}/>
+            <DestinationTrip token={props.token} />
             <button className="btn btn-primary btn-submit" type="submit">Confirm Add</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
         </form>

@@ -11,7 +11,7 @@ let DestinationsTable = (props) =>
         method: "GET",
         headers: {
             "Accept": "application/json",
-            // "Authorization": `Bearer ${token}` 
+            "Authorization": `Bearer ${props.token}` 
         }
     };
     
