@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReviewsTable from './ReviewsTable';
 
 let UserProfile = (props) => {
-    const [reviews, setReviews] = useState([]);
+    const [state, setState] = useState({list:[], form:"", action:()=>{}, review:{}});
 
     useEffect(() => {
         const init = {
@@ -21,7 +21,7 @@ let UserProfile = (props) => {
                 }
                 return response.json();
             })
-            .then(json => {setReviews(json)})
+            .then(json => {setState(json)})
             .catch(console.log);
     }, [props.token]);
 
@@ -46,7 +46,7 @@ let UserProfile = (props) => {
             <div className="row">
                 <div className="col">
                     <ReviewsTable 
-                        list={reviews} 
+                        list={state.list} 
                         handleAdd={viewAddForm} 
                         handleUpdate={viewUpdateForm} 
                         handleDelete={viewDeleteForm} 
