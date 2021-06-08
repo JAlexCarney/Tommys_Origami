@@ -10,14 +10,14 @@
                 <input type="text" class="form-control" id="City" asp-for="City">
             </div>
             <div class="mb-3">
-                <label asp-for="City" class="form-label">State/Province</label>
-                <input type="text" class="form-control" id="StateProvince" asp-for="City">
+                <label asp-for="StateProvince" class="form-label">State/Province</label>
+                <input type="text" class="form-control" id="StateProvince" asp-for="StateProvince">
             </div>
             <div class="mb-3">
                 <label asp-for="Country" class="form-label">Country</label>
                 <input type="text" class="form-control" id="Country" asp-for="Country">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" asp-controller="Destinations" asp-action="Edit">Submit</button>
         </form>
     </div>
 </div>

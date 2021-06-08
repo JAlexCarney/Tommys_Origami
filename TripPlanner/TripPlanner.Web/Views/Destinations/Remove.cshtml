@@ -6,7 +6,8 @@
         <form asp-controller="Destination" asp-action="Remove" asp-route-id="@Model.DestinationID" method="post">
             <p>Would you like to remove @Model.City, @Model.Country?</p>
             <input type="hidden" asp-for="DestinationID" />
-            <button class="btn btn-danger">Remove</button>
+            <button class="btn btn-danger" asp-action="Remove" asp-controller="Remove">Remove</button>
+            <a asp-controller="Destinations" asp-action="Remove">Remove</a>
             <a asp-action="GetAll" asp-controller="Destination">Go Back</a>
         </form>
     </div>
