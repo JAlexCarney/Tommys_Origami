@@ -92,7 +92,7 @@ namespace TripPlanner.Web.Controllers.MVC
         }
 
         [Route("edit/{id}")]
-        [HttpPut]
+        [HttpPost]
         public IActionResult Edit(Destination model)
         {
             var result = _destinationRepository.Edit(model);
@@ -125,7 +125,7 @@ namespace TripPlanner.Web.Controllers.MVC
         }
 
         [Route("remove/{id}")]
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Remove(Destination model)
         {
             var result = _destinationRepository.Remove(model.DestinationID);
