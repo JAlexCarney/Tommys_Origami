@@ -65,7 +65,9 @@ namespace TripPlanner.Web.Controllers.MVC
 
             if (result.Success)
             {
-                return View(result.Data);
+                //return View(result.Data);
+                return RedirectToAction("GetAll");
+
             }
             else
             {
@@ -113,7 +115,8 @@ namespace TripPlanner.Web.Controllers.MVC
 
             if (result.Success)
             {
-                return Remove(result.Data);
+                //return Remove(result.Data);
+                return View(result.Data);
             }
             else
             {
