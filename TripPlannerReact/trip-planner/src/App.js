@@ -30,7 +30,6 @@ function App() {
   return (
     <div>
       <TripPlanner />
-      <DestinationTrip token={"123"} list={state} />
     </div>
   );
 }
