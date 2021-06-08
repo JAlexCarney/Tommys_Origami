@@ -132,7 +132,7 @@ namespace TripPlanner.DAL.Repos
                         destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
                         destination.City = dr["City"].ToString();
                         destination.Country = dr["Country"].ToString();
-                        destination.AverageRating = int.Parse(dr["Average Rating"].ToString());
+                        destination.AverageRating = decimal.Parse(dr["Average Rating"].ToString());
                         if (dr["StateProvince"] != DBNull.Value)
                         {
                             destination.StateProvince = dr["StateProvince"].ToString();
