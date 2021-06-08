@@ -8,7 +8,7 @@ let UserProfile = (props) => {
     }
 
     return (
-        <div>
+        <>
             <header>
             <div className="container-flex my-navbar">
                 <div className="row">
@@ -24,7 +24,7 @@ let UserProfile = (props) => {
             </div>
             </header>
             <TripsContainer userID={props.userID} token={props.token}/>
-        </div>
+        </>
     );
 }
 

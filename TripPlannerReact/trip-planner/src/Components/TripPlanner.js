@@ -37,7 +37,6 @@ let TripPlanner = () => {
                     </div>;
         case "UserProfile":
             return <UserProfile changePage={ChangePage} token={state.token} userID={state.userID}/>;
-        
         case "Login":
         default:
             return <div className="container-flex d-flex align-items-center justify-content-center login-container">
