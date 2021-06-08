@@ -68,7 +68,43 @@ let UserProfile = (props) => {
     }
 
     let viewUpdateForm = (trip) => {
-        console.log("viewing trip");
+        let newState = {...state};
+        newState.form = "Edit";
+        newState.action = (trip) => {
+            let tripWithUser = {...trip};
+            tripWithUser.userID = props.userID;
+            console.log(tripWithUser);
+            const init = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                },
+                body: JSON.stringify(tripWithUser)
+              };
+          
+            fetch("https://localhost:44365/api/trips", init)
+                .then(response => {
+                    if (response.status !== 201) {
+                        return Promise.reject("response is not 200 OK");
+                    }
+                    return response.json();
+                })
+                .then((json) => {
+                    let newState = {...state};
+                    let i = state.list.findIndex(t => t.tripID === trip.tripID)
+                    newState.list = [...state.list];
+                    newState.list[i] = json;
+                    newState.form = "";
+                    newState.action = ()=>{};
+                    newState.trip = {};
+                    setState(newState);
+                })
+                .catch(console.log);
+        };
+        newState.trip = trip;
+        setState(newState);
     }
 
     let viewDeleteForm = (trip) => {
@@ -118,12 +154,18 @@ let UserProfile = (props) => {
         setState(newState);
     }
 
+    let tableSize="col col-6";
+    if(state.form === "")
+    {
+        tableSize="col col-12";
+    }
+
     return (   
         <div className="container-flex profile-container">
             <div className="row">
-                <div className="col col-6">
+                <div className={tableSize}>
                     <TripsTable 
-                        list={state.list} 
+                        list={state.list}
                         handleAdd={viewAddForm} 
                         handleUpdate={viewUpdateForm} 
                         handleDelete={viewDeleteForm} 

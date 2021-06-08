@@ -7,7 +7,7 @@ let TripsTable = (props) =>
         return list.map((trip, i) => {
             return (
                 <tr key={i} className="trips-tr">
-                    <td><button className="btn btn-secondary btn-round table-data" onClick={() => props.handleView(trip)}>{i}</button></td>
+                    <td><button className="btn btn-secondary btn-round table-data" onClick={() => props.handleView(trip)}>{trip.tripID}</button></td>
                     <td className="table-data">{trip.startDate.slice(0, 10)}</td>
                     <td><button className="btn btn-primary table-data btn-edit" onClick={() => props.handleUpdate(trip)}>Edit</button>
                     <button className="btn btn-danger table-data btn-delete" onClick={() => props.handleDelete(trip)}>Delete</button></td>
