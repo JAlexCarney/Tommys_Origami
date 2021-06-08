@@ -30,7 +30,6 @@ namespace TripPlanner.DAL.Tests
 
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.Data);
-            Assert.IsTrue(response.Data.Count <= 10);
         }
 
         [Test]
@@ -40,7 +39,6 @@ namespace TripPlanner.DAL.Tests
 
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.Data);
-            Assert.IsTrue(response.Data.Count <= 10);
         }
 
         [Test]
@@ -50,7 +48,6 @@ namespace TripPlanner.DAL.Tests
 
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.Data);
-            Assert.IsTrue(response.Data.Count <= 10);
         }
     }
 }
