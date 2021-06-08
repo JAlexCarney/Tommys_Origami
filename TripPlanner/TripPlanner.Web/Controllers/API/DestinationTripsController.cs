@@ -35,7 +35,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpGet(Name = "GetDestinationTrip"), Authorize]
+        [HttpGet(Name = "GetDestinationTrip")]
         [Route("get")]
         public IActionResult GetDestinationTrip(DestinationTripModel model)
         {
@@ -52,7 +52,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost]
         [Route("/api/destinationtrips")]
         public IActionResult AddDestinationTrips(DestinationTrip destinationTrip)
         {
@@ -69,7 +69,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpPut, Authorize]
+        [HttpPut]
         public IActionResult EditDestinationTrips(DestinationTrip destinationTrip)
         {
             if (!_destinationTripRepository.Get(destinationTrip.DestinationID, destinationTrip.TripID).Success)
@@ -90,7 +90,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(ModelState);
         }
 
-        [HttpDelete, Authorize]
+        [HttpDelete]
         public IActionResult RemoveDestinationTrips(DestinationTripModel model)
         {
             if (!_destinationTripRepository.Get(model.DestinationID, model.TripID).Success)
