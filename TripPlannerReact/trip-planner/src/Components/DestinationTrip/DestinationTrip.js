@@ -83,8 +83,9 @@ let DestinationsTable = (props) =>
 
     let handleDelete = (id) => {
         let index = destinationTrips.findIndex((v) => v.destinationID == id);
-        destinationTrips.splice(index,1);
-        setDestinationTrips(destinationTrips);
+        let dt = [...destinationTrips];
+        dt.splice(index,1);
+        setDestinationTrips(dt);
     }
 
     // let handleEditDelete = (id) => {
@@ -92,8 +93,8 @@ let DestinationsTable = (props) =>
     //     setUpdateDestinationTrips(newDT);
     // }
 
-    let handleSubmit = () => {
-        
+    let handleSubmit = (event) => {
+        event.preventDefault();
         let dt = {
             destinationID: destinationTrip.destinationID,
             destination: destinationTrip.destination,
@@ -102,7 +103,8 @@ let DestinationsTable = (props) =>
         let newDestinationTrips = [...destinationTrips];
         newDestinationTrips.push(dt);
         setDestinationTrips(newDestinationTrips);
-        props.addDestinations(destinationTrips);
+        props.addDestinations(newDestinationTrips);
+        event.target.reset();
     }
     let destinationOptions = (list) =>
     {
@@ -118,9 +120,9 @@ let DestinationsTable = (props) =>
     let addedDestinations = (list) =>
     {
         if(list !== null){
-            return list.map((destination) => {
+            return list.map((destination, index) => {
                 return (
-                    <tr>
+                    <tr key={index}>
                         <td>
                             <button onClick={() => handleDelete(destination.destinationID)} id="deleteButton" type="button" className="btn btn-danger">-</button>
                             {destination.destinationID}
@@ -142,9 +144,9 @@ let DestinationsTable = (props) =>
     {
         console.log(updateDestinationTrips);
         if(list !== null){
-            return list.map((destination) => {
+            return list.map((destination, index) => {
                 return (
-                    <tr>
+                    <tr key={index}>
                         <td>
                         {/* onClick={handleDelete(destination.destinationID)}  */}
                             <button id="deleteButton" type="button" className="btn btn-danger">-</button>
@@ -165,34 +167,34 @@ let DestinationsTable = (props) =>
     if(props.isAdd){
         return (
             <div class="container">
-                <form>
+                <form onSubmit={handleSubmit} id="destinationTripForm" >
                     <table className="table table-striped" id="destinationTable">
                         <thead className="thead-dark">
-                            <tr>
+                            <tr key={-1}>
                                 <th ></th>
                                 <th><h5 id="destinationHeader">DESTINATIONS</h5></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr key={-2}>
                                 <td>
                                     <div className="form-group">
                                         <label htmlfor="Description" className="control-label">Description</label>
-                                        <input type="text" htmlfor="Description" className="form-control inputs" onChange={handleChange}/>
+                                        <input id="descriptionInput" form="destinationTripForm" type="text" htmlfor="Description" className="form-control inputs" onChange={handleChange}/>
                                     </div>
                                 </td>
                                 <td>
                                     <div className="form-group">
                                         <label htmlfor="Destinations" className="control-label">Destinations</label>
-                                        <select onChange={handleSelection}>
+                                        <select onChange={handleSelection} form="destinationTripForm">
                                             <option selected disabled>Choose Destination</option>
                                             {destinationOptions(state)}
                                         </select>
                                     </div>
                                 </td>
                                 <td>
-                                    <button id="addButton" onClick={handleSubmit} type="button" className="btn btn-primary">&#43;</button>
+                                    <button form="destinationTripForm" id="addButton" type="submit" className="btn btn-primary">&#43;</button>
                                 </td>
                             </tr>
                             {addedDestinations(destinationTrips)}

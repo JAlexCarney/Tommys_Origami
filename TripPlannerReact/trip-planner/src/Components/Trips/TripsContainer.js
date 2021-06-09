@@ -29,10 +29,44 @@ let UserProfile = (props) => {
             .catch(console.log);
     }, [props.token, props.userID]);
 
+    let addDestinationTrips = (tripID, list) => {
+        let destinationTrips = list.map((dt) => {
+            return (
+                {
+                    tripID: tripID,
+                    destinationID: dt.destinationID,
+                    description: dt.description
+                }
+            )
+        })
+        for(let i = 0; i < destinationTrips.length; i++){
+            const init = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                },
+                body: JSON.stringify(destinationTrips[i])
+              };
+              fetch("https://localhost:44365/api/destinationtrips", init)
+              .then(response => {
+                  if (response.status !== 201) {
+                      return Promise.reject("response is not 200 OK");
+                  }
+                  return response.json();
+              })
+              .then((console.log))
+              .catch(console.log);
+            
+            }
+
+        }
+
     let viewAddForm = (trip) => {
         let newState = {...state};
         newState.form = "Add";
-        newState.action = (trip) => {
+        newState.action = (trip, list) => {
             let tripWithUser = {...trip};
             tripWithUser.userID = props.userID;
             console.log(tripWithUser);
@@ -54,6 +88,7 @@ let UserProfile = (props) => {
                     return response.json();
                 })
                 .then((json) => {
+                    addDestinationTrips(json.tripID, list);
                     let newState = {...state};
                     newState.list.unshift(json);
                     newState.form = "";
@@ -111,6 +146,7 @@ let UserProfile = (props) => {
         let newState = {...state};
         newState.form = "Delete";
         newState.action = (trip) => {
+            console.log("Attempting to delete");
             const init = {
                 method: "DELETE",
                 headers: {

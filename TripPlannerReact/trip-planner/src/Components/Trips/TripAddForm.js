@@ -34,7 +34,6 @@ let Component = (props) =>
     return (
         <div className="form">
             <h3 className="form-header">Adding Trip</h3>
-        <form onSubmit={(event) => {event.preventDefault(); console.log(state); props.handleAdd(state);}}>
             <div className="form-field">
                 <label htmlFor="startDate">Start Date</label>
                 <input type="date" name="startDate" onChange={handleChange}></input>
@@ -48,6 +47,7 @@ let Component = (props) =>
                 <input type="checkbox" name="isBooked" onChange={handleCheck}></input>
             </div>
             <DestinationTrip token={props.token} isAdd={true} addDestinations={addDestinations}/>
+        <form onSubmit={(event) => {event.preventDefault(); console.log(state); props.handleAdd(state, destinationTrips);}}>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Add</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
         </form>
