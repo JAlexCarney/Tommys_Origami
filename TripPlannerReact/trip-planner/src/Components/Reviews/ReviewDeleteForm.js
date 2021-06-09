@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 let Component = (props) => 
@@ -14,20 +15,24 @@ let Component = (props) =>
     
     return (
         <div className="form">
-            <h3 className="form-header">Deleting Review{" " + props.review.reviewID}</h3>
+            <h3 className="form-header">Deleting Review for Destination{" " + props.review.destinationID}</h3>
             <table className="table table-striped">
                 <tbody>
                     <tr>
                         <th>Destination</th>
-                        <td>{props.review.Destination.slice(0, reveiw.Destination.length)}</td>
+                        <td>{props.review.destinationID}</td>
                     </tr>
                     <tr>
                         <th>Rating</th>
-                        <td>{props.review.Rating.slice(0, 3)}</td>
+                        <td>{props.review.rating}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{props.review.description}</td>
                     </tr>
                 </tbody>
             </table>
-            <form onSubmit={(event => {event.preventDefault(); props.handleDelete(props.trip);})}>
+            <form onSubmit={(event => {event.preventDefault(); props.handleDelete(props.review);})}>
                 <button className="btn btn-danger btn-submit" type="submit">Confirm Delete</button><br/>
                 <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
             </form>

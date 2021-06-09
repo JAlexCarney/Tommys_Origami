@@ -29,6 +29,7 @@ let Component = (props) =>
             .then(json => setState(json))
             .catch(console.log);
       }, []);
+
       //getting all of the destinationTrips for the edit.  
       useEffect(() => {
           const headers = {
@@ -49,14 +50,14 @@ let Component = (props) =>
               })
               .then(json => setUpdateReviews(json))
               .catch(console.log);
-          }, []);
+        }, []);
 
     const handleChange = (event) => {
-        let newState = { ...state };
+        let newReview = { ...review };
 
-        newState[event.target.name] = event.target.value;
+        newReview[event.target.name] = event.target.value;
 
-        setState(newState);
+        setReview(newReview);
     };
 
     const handleCheck = (event) => {
@@ -76,7 +77,6 @@ let Component = (props) =>
         
         let newReview = { ...review };
         newReview["destinationID"] = event.target.value;
-        newReview["destination"] = event.target.options[event.target.selectedIndex].text;
         setReview(newReview);
     }
 
@@ -93,7 +93,7 @@ let Component = (props) =>
     return (
         <div className="form">
             <h3 className="form-header">Adding Review</h3>
-        <form onSubmit={(event) => {event.preventDefault(); console.log(state); props.handleAdd(state);}}>
+        <form onSubmit={(event) => {event.preventDefault(); console.log(review); props.handleAdd(review);}}>
             <div className="form-field">
                                     <label htmlfor="destination">Destination</label>
                                     <select onChange={handleSelection}>
@@ -104,21 +104,21 @@ let Component = (props) =>
             <div className="form-field">
                 <label htmlFor="rating">Rating</label>
                 <div class="wrapper">
-                    <input name="ratingRadio" type="radio" id="st1" value="1" />
+                    <input name="rating" onChange={handleChange} type="radio" id="st1" value="1" />
                     <label for="st1"></label>
-                    <input name="ratingRadio" type="radio" id="st2" value="2" />
+                    <input name="rating" onChange={handleChange} type="radio" id="st2" value="2" />
                     <label for="st2"></label>
-                    <input name="ratingRadio" type="radio" id="st3" value="3" />
+                    <input name="rating" onChange={handleChange} type="radio" id="st3" value="3" />
                     <label for="st3"></label>
-                    <input name="ratingRadio" type="radio" id="st4" value="4" />
+                    <input name="rating" onChange={handleChange} type="radio" id="st4" value="4" />
                     <label for="st4"></label>
-                    <input name="ratingRadio" type="radio" id="st5" value="5" />
+                    <input name="rating" onChange={handleChange} type="radio" id="st5" value="5" />
                     <label for="st5"></label>
                 </div>
             </div>
             <div className="form-field">
                 <label htmlFor="description">Description</label>
-                <input type="text" className="form-control inputs" defaultValue={"Great trip!"}/>
+                <input type="text" name="description" className="form-control inputs" onChange={handleChange} defaultValue={"Great trip!"}/>
             </div>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Add</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>

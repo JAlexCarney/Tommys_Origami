@@ -55,7 +55,6 @@ let UserProfile = (props) => {
                     newState.list.unshift(json);
                     newState.form = "";
                     newState.action = ()=>{};
-                    newState.trip = {};
                     setState(newState);
                 })
                 .catch(console.log);
@@ -69,7 +68,37 @@ let UserProfile = (props) => {
     }
 
     let viewDeleteForm = (review) => {
-        console.log("Removing review");
+        let newState = {...state};
+        newState.form = "Delete";
+        newState.action = (review) => {
+            console.log(review);
+            const init = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                },
+                body: JSON.stringify(review)
+              };
+              
+            console.log(review);
+            fetch(`https://localhost:44365/api/reviews`, init)
+                .then(response => {
+                    if (response.status === 200) {
+                        let newState = {...state};
+                        newState.list = state.list.filter(r => r.destinationID  !== review.destinationID);
+                        newState.form = "";
+                        newState.action = ()=>{};
+                        newState.review = {};
+                        setState(newState);
+                    }
+                    return Promise.reject("response is not 200 OK");
+                })
+                .catch(console.log);
+        };
+        newState.review = review;
+        setState(newState);
     }
 
     let viewViewForm = (review) => {
