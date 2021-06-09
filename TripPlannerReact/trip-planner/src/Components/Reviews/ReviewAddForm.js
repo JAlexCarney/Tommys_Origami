@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react';
 let Component = (props) => 
 {
     const [state, setState] = useState([]);
-    const [review, setReview] = useState({});
+    const [review, setReview] = useState({"destinationID":-1,"rating":0,"description":"Great Trip!"});
     const [reviews, setReviews] = useState([]);
     const [updateReviews, setUpdateReviews] = useState([]);
 
@@ -30,27 +30,29 @@ let Component = (props) =>
             .catch(console.log);
       }, []);
 
-      //getting all of the destinationTrips for the edit.  
-      useEffect(() => {
-          const headers = {
-              method: "GET",
-              headers: {
-                  "Accept": "application/json",
-                  "Authorization": `Bearer ${props.token}` 
-              }
-          };
-          let url = "https://localhost:44365/api/destinationtrips/bytrip/" + props.tripID;
-          fetch(url, headers)
-              .then(response => {
-                  if (response.status !== 200) {
-                      console.log(`Bad status: ${response.status}`);
-                      return Promise.reject("response is not 200 OK");
-                  }
-                  return response.json();
-              })
-              .then(json => setUpdateReviews(json))
-              .catch(console.log);
-        }, []);
+    //getting all of the destinationTrips for the edit.  
+    /*
+    useEffect(() => {
+        const headers = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": `Bearer ${props.token}` 
+            }
+        };
+        let url = "https://localhost:44365/api/reviews/getbyuser/" + props.userID;
+        fetch(url, headers)
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(`Bad status: ${response.status}`);
+                    return Promise.reject("response is not 200 OK");
+                }
+                return response.json();
+            })
+            .then(json => setUpdateReviews(json))
+            .catch(console.log);
+    }, []);
+    */
 
     const handleChange = (event) => {
         let newReview = { ...review };
@@ -95,7 +97,7 @@ let Component = (props) =>
             <h3 className="form-header">Adding Review</h3>
         <form onSubmit={(event) => {event.preventDefault(); console.log(review); props.handleAdd(review);}}>
             <div className="form-field">
-                                    <label htmlfor="destination">Destination</label>
+                                    <label htmlFor="destination">Destination</label>
                                     <select onChange={handleSelection}>
                                         <option selected disabled>Choose Destination</option>
                                         {destinationOptions(state)}
@@ -103,17 +105,18 @@ let Component = (props) =>
                                 </div>
             <div className="form-field">
                 <label htmlFor="rating">Rating</label>
-                <div class="wrapper">
-                    <input name="rating" onChange={handleChange} type="radio" id="st1" value="1" />
-                    <label for="st1"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st2" value="2" />
-                    <label for="st2"></label>
+                <div className="wrapper">
+                    
+                    <input name="rating" onChange={handleChange} type="radio" id="st1" value="5" />
+                    <label className="radio-inline" htmlFor="st1"></label>
+                    <input name="rating" onChange={handleChange} type="radio" id="st2" value="4" />
+                    <label className="radio-inline" htmlFor="st2"></label>
                     <input name="rating" onChange={handleChange} type="radio" id="st3" value="3" />
-                    <label for="st3"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st4" value="4" />
-                    <label for="st4"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st5" value="5" />
-                    <label for="st5"></label>
+                    <label className="radio-inline" htmlFor="st3"></label>
+                    <input name="rating" onChange={handleChange} type="radio" id="st4" value="2" />
+                    <label className="radio-inline" htmlFor="st4"></label>
+                    <input name="rating" onChange={handleChange} type="radio" id="st5" value="1" />
+                    <label className="radio-inline" htmlFor="st5"></label>
                 </div>
             </div>
             <div className="form-field">

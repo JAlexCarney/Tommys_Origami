@@ -17,7 +17,7 @@ let Component = (props) =>
         case "Delete":
             return (<ReviewDeleteForm review={props.review} handleDelete={props.action} exitView={props.exitAction}/>);
         default:
-            return (<div>default</div>);
+            return (<></>);
     }
 }
 export default Component;
