@@ -160,3 +160,41 @@ form {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+.inputs {
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+}
+
+select {
+  height: 37px;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#addButton {
+  margin-top: 40px;
+  font-size: large;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#destinationHeader{
+  margin-right: 170px;
+}
+
+/* .editInput{
+  width: 50px;
+  float: left;
+} */
+
+#deleteButton{
+  float: left;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
