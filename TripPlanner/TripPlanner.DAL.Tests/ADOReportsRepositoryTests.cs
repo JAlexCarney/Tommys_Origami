@@ -49,5 +49,14 @@ namespace TripPlanner.DAL.Tests
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.Data);
         }
+
+        [Test]
+        public void ShouldReportDestinationTripsWithCity()
+        {
+            var response = repo.GetDestinationTripsWithCity();
+
+            Assert.IsTrue(response.Success);
+            Assert.IsNotNull(response.Data);
+        }
     }
 }

@@ -69,5 +69,21 @@ namespace TripPlanner.Web.Controllers.API
                 return BadRequest(ModelState);
             }
         }
+
+        [Route("destinationtripswithcity")]
+        [HttpGet]
+        public IActionResult DestinationTripsWithCity()
+        {
+            var result = _reportsRepository.GetDestinationTripsWithCity();
+
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
     }
 }
