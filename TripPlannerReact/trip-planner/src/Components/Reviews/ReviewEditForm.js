@@ -45,7 +45,6 @@ let Component = (props) =>
                 
             );
         });
-
     }
 
     return (
@@ -76,7 +75,7 @@ let Component = (props) =>
             </div>
             <div className="form-field">
                 <label htmlFor="description">Description</label>
-                <input type="text" name="description" onChange={handleCheck}></input>
+                <input type="text" className="form-control inputs" defaultValue={"Great trip!"}/>
             </div>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Add</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>

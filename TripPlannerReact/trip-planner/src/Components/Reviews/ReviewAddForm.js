@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 
@@ -7,6 +7,49 @@ let Component = (props) =>
     const [state, setState] = useState([]);
     const [review, setReview] = useState({});
     const [reviews, setReviews] = useState([]);
+    const [updateReviews, setUpdateReviews] = useState([]);
+
+    useEffect(() => {
+        const headers = {
+          method: "GET",
+          headers: {
+              "Accept": "application/json",
+              "Authorization": `Bearer ${props.token}` 
+          }
+      };
+      
+        fetch("https://localhost:44365/api/reports/mostvisited", headers)
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(`Bad status: ${response.status}`);
+                    return Promise.reject("response is not 200 OK");
+                }
+                return response.json();
+            })
+            .then(json => setState(json))
+            .catch(console.log);
+      }, []);
+      //getting all of the destinationTrips for the edit.  
+      useEffect(() => {
+          const headers = {
+              method: "GET",
+              headers: {
+                  "Accept": "application/json",
+                  "Authorization": `Bearer ${props.token}` 
+              }
+          };
+          let url = "https://localhost:44365/api/destinationtrips/bytrip/" + props.tripID;
+          fetch(url, headers)
+              .then(response => {
+                  if (response.status !== 200) {
+                      console.log(`Bad status: ${response.status}`);
+                      return Promise.reject("response is not 200 OK");
+                  }
+                  return response.json();
+              })
+              .then(json => setUpdateReviews(json))
+              .catch(console.log);
+          }, []);
 
     const handleChange = (event) => {
         let newState = { ...state };
@@ -45,7 +88,6 @@ let Component = (props) =>
                 
             );
         });
-
     }
 
     return (
@@ -76,7 +118,7 @@ let Component = (props) =>
             </div>
             <div className="form-field">
                 <label htmlFor="description">Description</label>
-                <input type="text" name="description" onChange={handleCheck}></input>
+                <input type="text" className="form-control inputs" defaultValue={"Great trip!"}/>
             </div>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Add</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
