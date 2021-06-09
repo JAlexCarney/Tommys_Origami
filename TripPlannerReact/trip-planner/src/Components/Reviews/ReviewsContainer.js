@@ -68,8 +68,72 @@ let UserProfile = (props) => {
         setState(newState);
     }
 
+    let editReviews = (id, list) => {
+        console.log(id);
+        console.log(list);
+        for(let i = 0; i < list.length; i++){
+            const init = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                },
+                body: JSON.stringify(list[i])
+              };
+          
+            fetch("https://localhost:44365/api/reviews", init)
+                .then(response => {
+                    if (response.status !== 200) {
+                        console.log(response.status);
+                        return Promise.reject("response is not 200 OK");
+                    }
+                    // return response.json();
+                })
+                .catch(console.log);
+        }
+        
+    }
+
     let viewUpdateForm = (review) => {
-        console.log("Updating review");
+        let newState = {...state};
+        newState.form = "Edit";
+        newState.action = (review, list) => {
+            let reviewWithUser = {...reviewWithUser};
+            reviewWithUser.userID = props.userID;
+            const init = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                },
+                body: JSON.stringify(reviewWithUser)
+              };
+          
+            fetch("https://localhost:44365/api/getreviewsbyuser/" + props.userID, init)
+                .then(response => {
+                    if (response.status !== 200) {
+                        console.log(response.status);
+                        return Promise.reject("response is not 200 OK");
+                    }
+                    // return response.json();
+                })
+                .then(() => {
+                    editReviews(review.userID, list);
+                    let newState = {...state};
+                    let i = state.list.findIndex(r => r.reviewID === review.reviewID)
+                    newState.list = [...state.list];
+                    newState.list[i] = review;
+                    newState.form = "";
+                    newState.action = ()=>{};
+                    newState.review = {};
+                    setState(newState);
+                })
+                .catch(console.log);
+        };
+        newState.review = review;
+        setState(newState);
     }
 
     let viewDeleteForm = (review) => {
