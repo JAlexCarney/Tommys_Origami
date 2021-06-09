@@ -142,7 +142,6 @@ namespace TripPlanner.DAL.Repos
                     foreach (DestinationTrip destinationTrip in destinationTripsToRemove)
                     {
                         _context.DestinationTrip.Remove(destinationTrip);
-                        _context.SaveChanges();
                     }
                 }
                 var reviewToRemove = _context.Review.Where(r => r.DestinationID == destinationID);
@@ -151,7 +150,6 @@ namespace TripPlanner.DAL.Repos
                     foreach (Review review in reviewToRemove)
                     {
                         _context.Review.Remove(review);
-                        _context.SaveChanges();
                     }
                 }
                 _context.Destination.Remove(toRemove);
