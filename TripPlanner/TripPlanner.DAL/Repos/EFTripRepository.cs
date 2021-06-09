@@ -147,7 +147,6 @@ namespace TripPlanner.DAL.Repos
                     foreach (DestinationTrip destinationTrip in destinationTripsToRemove)
                     {
                         _context.DestinationTrip.Remove(destinationTrip);
-                        _context.SaveChanges();
                     }
                 }
                 _context.Trip.Remove(toRemove);

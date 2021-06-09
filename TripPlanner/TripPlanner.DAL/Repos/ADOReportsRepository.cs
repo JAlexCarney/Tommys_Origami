@@ -35,24 +35,25 @@ namespace TripPlanner.DAL.Repos
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.HasRows && dr.Read())
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        MostReviewedDestinations destination = new MostReviewedDestinations();
-                        destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
-                        destination.City = dr["City"].ToString();
-                        destination.Country = dr["Country"].ToString();
-                        destination.NumberOfReviews = int.Parse(dr["Number Of Reviews"].ToString());
-                        if (dr["StateProvince"] != DBNull.Value)
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.HasRows && dr.Read())
                         {
-                            destination.StateProvince = dr["StateProvince"].ToString();
+                            MostReviewedDestinations destination = new MostReviewedDestinations();
+                            destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
+                            destination.City = dr["City"].ToString();
+                            destination.Country = dr["Country"].ToString();
+                            destination.NumberOfReviews = int.Parse(dr["Number Of Reviews"].ToString());
+                            if (dr["StateProvince"] != DBNull.Value)
+                            {
+                                destination.StateProvince = dr["StateProvince"].ToString();
+                            }
+
+                            mostReviewedDestinations.Add(destination);
                         }
-
-                        mostReviewedDestinations.Add(destination);
                     }
-
                 }
                 catch (SqlException ex)
                 {
@@ -79,24 +80,25 @@ namespace TripPlanner.DAL.Repos
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.HasRows && dr.Read())
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        MostVisitedDestinations destination = new MostVisitedDestinations();
-                        destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
-                        destination.City = dr["City"].ToString();
-                        destination.Country = dr["Country"].ToString();
-                        destination.TotalVisitors = int.Parse(dr["Number Of Visitors"].ToString());
-                        if (dr["StateProvince"] != DBNull.Value)
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.HasRows && dr.Read())
                         {
-                            destination.StateProvince = dr["StateProvince"].ToString();
+                            MostVisitedDestinations destination = new MostVisitedDestinations();
+                            destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
+                            destination.City = dr["City"].ToString();
+                            destination.Country = dr["Country"].ToString();
+                            destination.TotalVisitors = int.Parse(dr["Number Of Visitors"].ToString());
+                            if (dr["StateProvince"] != DBNull.Value)
+                            {
+                                destination.StateProvince = dr["StateProvince"].ToString();
+                            }
+
+                            mostVisitedDestinations.Add(destination);
                         }
-
-                        mostVisitedDestinations.Add(destination);
                     }
-
                 }
                 catch (SqlException ex)
                 {
@@ -123,24 +125,25 @@ namespace TripPlanner.DAL.Repos
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.HasRows && dr.Read())
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        TopRatedDestinations destination = new TopRatedDestinations();
-                        destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
-                        destination.City = dr["City"].ToString();
-                        destination.Country = dr["Country"].ToString();
-                        destination.AverageRating = decimal.Parse(dr["Average Rating"].ToString());
-                        if (dr["StateProvince"] != DBNull.Value)
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.HasRows && dr.Read())
                         {
-                            destination.StateProvince = dr["StateProvince"].ToString();
+                            TopRatedDestinations destination = new TopRatedDestinations();
+                            destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
+                            destination.City = dr["City"].ToString();
+                            destination.Country = dr["Country"].ToString();
+                            destination.AverageRating = decimal.Parse(dr["Average Rating"].ToString());
+                            if (dr["StateProvince"] != DBNull.Value)
+                            {
+                                destination.StateProvince = dr["StateProvince"].ToString();
+                            }
+
+                            topRatedDestinations.Add(destination);
                         }
-
-                        topRatedDestinations.Add(destination);
                     }
-
                 }
                 catch (SqlException ex)
                 {

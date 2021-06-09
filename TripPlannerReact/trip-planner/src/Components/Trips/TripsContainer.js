@@ -121,16 +121,17 @@ let UserProfile = (props) => {
           
             fetch("https://localhost:44365/api/trips", init)
                 .then(response => {
-                    if (response.status !== 201) {
+                    if (response.status !== 200) {
+                        console.log(response.status);
                         return Promise.reject("response is not 200 OK");
                     }
-                    return response.json();
+                    // return response.json();
                 })
-                .then((json) => {
+                .then(() => {
                     let newState = {...state};
                     let i = state.list.findIndex(t => t.tripID === trip.tripID)
                     newState.list = [...state.list];
-                    newState.list[i] = json;
+                    newState.list[i] = trip;
                     newState.form = "";
                     newState.action = ()=>{};
                     newState.trip = {};
