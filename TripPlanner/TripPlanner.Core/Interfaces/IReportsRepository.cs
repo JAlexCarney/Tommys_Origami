@@ -13,5 +13,7 @@ namespace TripPlanner.Core.Interfaces
         Response<List<TopRatedDestinations>> GetTopRatedDestintions();
         Response<List<MostVisitedDestinations>> GetMostVisitedDestintions();
         Response<List<MostReviewedDestinations>> GetMostRatedDestintions();
+        Response<List<DestinationTripsWithCity>> GetDestinationTripsWithCity();
+
     }
 }

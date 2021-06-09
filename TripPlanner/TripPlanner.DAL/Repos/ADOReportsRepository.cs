@@ -159,5 +159,46 @@ namespace TripPlanner.DAL.Repos
             result.Data = topRatedDestinations;
             return result;
         }
+
+        public Response<List<DestinationTripsWithCity>> GetDestinationTripsWithCity()
+        {
+            Response<List<DestinationTripsWithCity>> result = new Response<List<DestinationTripsWithCity>>();
+            List<DestinationTripsWithCity> destinationTripsWithCity = new List<DestinationTripsWithCity>();
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string sql = @"DestinationTripsWithCity";
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.HasRows && dr.Read())
+                        {
+                            DestinationTripsWithCity destination = new DestinationTripsWithCity();
+                            destination.DestinationID = int.Parse(dr["DestinationID"].ToString());
+                            destination.TripID = int.Parse(dr["TripID"].ToString());
+                            destination.CityCountry = dr["City"].ToString() + " - " + dr["Country"].ToString();
+                            destination.Description = dr["Description"].ToString();
+
+                            destinationTripsWithCity.Add(destination);
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    result.Message = ex.Message;
+                    return result;
+                }
+            }
+            if (destinationTripsWithCity.Count <= 0)
+            {
+                result.Message = "Could not find top rated destinations list.";
+                return result;
+            }
+            result.Data = destinationTripsWithCity;
+            return result;
+        }
     }
 }
