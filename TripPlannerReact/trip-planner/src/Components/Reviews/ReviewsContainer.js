@@ -71,16 +71,19 @@ let UserProfile = (props) => {
         let newState = {...state};
         newState.form = "Delete";
         newState.action = (review) => {
+            console.log(review);
             const init = {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                     "Authorization": "Bearer " + props.token
-                }
+                },
+                body: JSON.stringify(review)
               };
-          
-            fetch(`https://localhost:44365/api/reviews/${review.destinationID}`, init)
+              
+            console.log(review);
+            fetch(`https://localhost:44365/api/reviews`, init)
                 .then(response => {
                     if (response.status === 200) {
                         let newState = {...state};

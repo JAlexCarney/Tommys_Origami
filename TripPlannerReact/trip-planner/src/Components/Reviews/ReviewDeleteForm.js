@@ -32,7 +32,7 @@ let Component = (props) =>
                     </tr>
                 </tbody>
             </table>
-            <form onSubmit={(event => {event.preventDefault(); props.handleDelete(props.trip);})}>
+            <form onSubmit={(event => {event.preventDefault(); props.handleDelete(props.review);})}>
                 <button className="btn btn-danger btn-submit" type="submit">Confirm Delete</button><br/>
                 <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
             </form>
