@@ -69,7 +69,6 @@ let UserProfile = (props) => {
         newState.action = (trip, list) => {
             let tripWithUser = {...trip};
             tripWithUser.userID = props.userID;
-            console.log(tripWithUser);
             const init = {
                 method: "POST",
                 headers: {
@@ -102,13 +101,39 @@ let UserProfile = (props) => {
         setState(newState);
     }
 
+    let editDestinationTrips = (id, list) => {
+        console.log(id);
+        console.log(list);
+        for(let i = 0; i < list.length; i++){
+            const init = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + props.token
+                },
+                body: JSON.stringify(list[i])
+              };
+          
+            fetch("https://localhost:44365/api/destinationtrips", init)
+                .then(response => {
+                    if (response.status !== 200) {
+                        console.log(response.status);
+                        return Promise.reject("response is not 200 OK");
+                    }
+                    // return response.json();
+                })
+                .catch(console.log);
+        }
+        
+    }
+
     let viewUpdateForm = (trip) => {
         let newState = {...state};
         newState.form = "Edit";
-        newState.action = (trip) => {
+        newState.action = (trip, list) => {
             let tripWithUser = {...trip};
             tripWithUser.userID = props.userID;
-            console.log(tripWithUser);
             const init = {
                 method: "PUT",
                 headers: {
@@ -128,6 +153,7 @@ let UserProfile = (props) => {
                     // return response.json();
                 })
                 .then(() => {
+                    editDestinationTrips(trip.tripID, list);
                     let newState = {...state};
                     let i = state.list.findIndex(t => t.tripID === trip.tripID)
                     newState.list = [...state.list];
@@ -147,7 +173,6 @@ let UserProfile = (props) => {
         let newState = {...state};
         newState.form = "Delete";
         newState.action = (trip) => {
-            console.log("Attempting to delete");
             const init = {
                 method: "DELETE",
                 headers: {

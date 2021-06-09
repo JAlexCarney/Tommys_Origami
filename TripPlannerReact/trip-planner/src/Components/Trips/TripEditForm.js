@@ -37,7 +37,6 @@ let Component = (props) =>
     return (
         <div className="form">
             <h3 className="form-header">Editing Trip{" " + props.trip.tripID}</h3>
-        <form key={props.trip.tripID} onSubmit={(event) => {event.preventDefault(); props.handleEdit(state);}}>
             <div className="form-field">
                 <label htmlFor="startDate">Start Date</label>
                 <input type="date" defaultValue={props.trip.startDate.slice(0, 10)} name="startDate" onChange={handleChange}></input>
@@ -51,6 +50,7 @@ let Component = (props) =>
                 <input type="checkbox" defaultChecked={props.trip.isBooked} name="isBooked" onChange={handleCheck}></input>
             </div>
             <DestinationTrip token={props.token} isAdd={false} tripID={props.trip.tripID} editDestinations={editDestinations}/>
+        <form key={props.trip.tripID} onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, editedDestinations);}}>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
         </form>

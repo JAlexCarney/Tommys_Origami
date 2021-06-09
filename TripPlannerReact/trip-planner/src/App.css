@@ -175,7 +175,7 @@ select {
   padding-right: 15px;
 }
 
-#addButton {
+.addButton {
   margin-top: 40px;
   font-size: large;
   border-radius: 15px;
@@ -192,7 +192,7 @@ select {
   float: left;
 } */
 
-#deleteButton{
+.deleteButton{
   float: left;
   border-radius: 15px;
   padding-left: 15px;
