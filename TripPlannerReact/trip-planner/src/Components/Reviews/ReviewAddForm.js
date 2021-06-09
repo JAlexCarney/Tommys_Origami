@@ -76,7 +76,6 @@ let Component = (props) =>
         
         let newReview = { ...review };
         newReview["destinationID"] = event.target.value;
-        newReview["destination"] = event.target.options[event.target.selectedIndex].text;
         setReview(newReview);
     }
 
@@ -104,21 +103,21 @@ let Component = (props) =>
             <div className="form-field">
                 <label htmlFor="rating">Rating</label>
                 <div class="wrapper">
-                    <input name="ratingRadio" type="radio" id="st1" value="1" />
+                    <input name="rating" type="radio" id="st1" value="5" />
                     <label for="st1"></label>
-                    <input name="ratingRadio" type="radio" id="st2" value="2" />
+                    <input name="rating" type="radio" id="st2" value="4" />
                     <label for="st2"></label>
-                    <input name="ratingRadio" type="radio" id="st3" value="3" />
+                    <input name="rating" type="radio" id="st3" value="3" />
                     <label for="st3"></label>
-                    <input name="ratingRadio" type="radio" id="st4" value="4" />
+                    <input name="rating" type="radio" id="st4" value="2" />
                     <label for="st4"></label>
-                    <input name="ratingRadio" type="radio" id="st5" value="5" />
+                    <input name="rating" type="radio" id="st5" value="1" />
                     <label for="st5"></label>
                 </div>
             </div>
             <div className="form-field">
                 <label htmlFor="description">Description</label>
-                <input type="text" className="form-control inputs" defaultValue={"Great trip!"}/>
+                <input type="text" onChange={handleChange} className="form-control inputs" defaultValue={"Great trip!"}/>
             </div>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Add</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
