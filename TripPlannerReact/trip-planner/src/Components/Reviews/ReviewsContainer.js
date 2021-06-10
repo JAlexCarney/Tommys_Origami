@@ -37,7 +37,7 @@ let UserProfile = (props) => {
         newState.action = (review) => {
             let reviewWithUser = {...review};
             reviewWithUser.userID = props.userID;
-            console.log(reviewWithUser);
+            //console.log(reviewWithUser);
             const init = {
                 method: "POST",
                 headers: {
@@ -98,9 +98,11 @@ let UserProfile = (props) => {
     let viewUpdateForm = (review) => {
         let newState = {...state};
         newState.form = "Edit";
+        console.log(review);
         newState.action = (review, list) => {
-            let reviewWithUser = {...reviewWithUser};
+            let reviewWithUser = {...review};
             reviewWithUser.userID = props.userID;
+            console.log(reviewWithUser);
             const init = {
                 method: "PUT",
                 headers: {

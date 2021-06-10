@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 
-//can take out
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 
 let Component = (props) => 
 {
@@ -21,18 +19,6 @@ let Component = (props) =>
         setState(newState);
     };
 
-    const handleCheck = (event) => {
-        let newState = { ...state };
-        if(event.target.value === "on")
-        {
-            newState[event.target.name] = true;
-        }
-        else
-        {
-            newState[event.target.name] = false;
-        }
-        setState(newState);
-    }
 
     const editReviews = (reviews) => {
         setEditedReviews(reviews);
@@ -65,7 +51,7 @@ let Component = (props) =>
                 <label htmlFor="description">Description</label>
                 <input type="text" className="form-control inputs" onChange={handleChange} defaultValue={props.review.description}/>
             </div>
-            <form onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, editedReviews);}}>
+            <form onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, editReviews);}}>
                 <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
                 <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
             </form>
