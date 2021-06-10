@@ -12,12 +12,12 @@
             <div class="mb-3">
                 <label asp-for="Password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="Password" asp-for="Password">
-                <div class="passwordValidation">@Html.ValidationMessageFor(m => m.Password)</div>
+                <div class="text-danger">@Html.ValidationMessageFor(m => m.Password)</div>
             </div>
             <div class="mb-3">
                 <label asp-for="Email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="Email" asp-for="Email">
-                @Html.ValidationMessageFor(m => m.Email)
+                <div class="text-danger">@Html.ValidationMessageFor(m => m.Email)</div>
             </div>
             <input type="hidden" asp-for="DateCreated" value="@Model.DateCreated" />
             <button type="submit" class="btn btn-primary">Submit</button>
