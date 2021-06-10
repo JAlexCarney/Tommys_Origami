@@ -96,10 +96,22 @@ namespace TripPlanner.Web.Controllers.MVC
             {
                 return RedirectToAction("Index");
             }
+            else if(model.Password == null && model.Email == null)
+            {
+                ModelState.AddModelError(nameof(model.Password), "");
+                ModelState.AddModelError(nameof(model.Email), "");
+                //return BadRequest(ModelState);
+            }
+            else if(model.Password == null)
+            {
+                ModelState.AddModelError(nameof(model.Password), "");
+            }
             else
             {
-                return BadRequest(ModelState);
+                ModelState.AddModelError(nameof(model.Email), "");
             }
+            return View(model);
+
         }
 
         [Route("remove/{id}")]
