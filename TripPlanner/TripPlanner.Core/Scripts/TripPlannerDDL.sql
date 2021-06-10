@@ -23,6 +23,7 @@ CREATE TABLE Destination (
 GO
 CREATE TABLE Trip (
  TripID int primary key identity(1,1),
+ [Name] VARCHAR(50),
  UserID UNIQUEIDENTIFIER not null foreign key references [User](UserID),
  StartDate date not null,
  ProjectedEndDate date not NULL,
