@@ -24,7 +24,7 @@ let Component = (props) =>
                     </tr>
                     <tr>
                         <th>Rating</th>
-                        <td>{props.review.rating}</td>
+                        <td>{props.review.rating} ⭐</td>
                     </tr>
                     <tr>
                         <th>Description</th>
