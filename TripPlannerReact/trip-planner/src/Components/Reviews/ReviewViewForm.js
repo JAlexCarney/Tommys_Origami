@@ -15,7 +15,7 @@ let Component = (props) =>
     
     return (
         <div className="form">
-            <h3 className="form-header">Deleting Review for Destination{" " + props.review.destinationID}</h3>
+            <h3 className="form-header">Review for Destination{" " + props.review.destinationID}</h3>
             <table className="table table-striped">
                 <tbody>
                     <tr>
