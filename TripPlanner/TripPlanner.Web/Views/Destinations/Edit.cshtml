@@ -8,6 +8,7 @@
             <div class="mb-3">
                 <label asp-for="City" class="form-label">City</label>
                 <input type="text" class="form-control" id="City" asp-for="City">
+                <div class="text-danger">@Html.ValidationMessageFor(m => m.City)</div>
             </div>
             <div class="mb-3">
                 <label asp-for="StateProvince" class="form-label">State/Province</label>
@@ -16,6 +17,7 @@
             <div class="mb-3">
                 <label asp-for="Country" class="form-label">Country</label>
                 <input type="text" class="form-control" id="Country" asp-for="Country">
+                <div class="text-danger">@Html.ValidationMessageFor(m => m.Country)</div>
             </div>
             <button type="submit" class="btn btn-primary" asp-controller="Destinations" asp-action="Edit">Submit</button>
         </form>

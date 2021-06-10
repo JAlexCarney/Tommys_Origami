@@ -69,10 +69,21 @@ namespace TripPlanner.Web.Controllers.MVC
                 return RedirectToAction("GetAll");
 
             }
+            else if (model.City == null && model.Country == null)
+            {
+                ModelState.AddModelError(nameof(model.City), "");
+                ModelState.AddModelError(nameof(model.Country), "");
+                //return BadRequest(ModelState);
+            }
+            else if (model.City == null)
+            {
+                ModelState.AddModelError(nameof(model.City), "");
+            }
             else
             {
-                return BadRequest(ModelState);
+                ModelState.AddModelError(nameof(model.Country), "");
             }
+            return View(model);
         }
 
         [Route("edit/{id}")]
@@ -101,10 +112,21 @@ namespace TripPlanner.Web.Controllers.MVC
             {
                 return RedirectToAction("GetAll");
             }
+            else if (model.City == null && model.Country == null)
+            {
+                ModelState.AddModelError(nameof(model.City), "");
+                ModelState.AddModelError(nameof(model.Country), "");
+                //return BadRequest(ModelState);
+            }
+            else if (model.City == null)
+            {
+                ModelState.AddModelError(nameof(model.City), "");
+            }
             else
             {
-                return BadRequest(ModelState);
+                ModelState.AddModelError(nameof(model.Country), "");
             }
+            return View(model);
         }
 
         [Route("remove/{id}")]
