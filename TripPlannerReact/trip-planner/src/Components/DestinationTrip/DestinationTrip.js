@@ -6,6 +6,7 @@ let DestinationsTable = (props) =>
     const [destinationTrip, setDestinationTrip] = useState({});
     const [destinationTrips, setDestinationTrips] = useState([]);
     const [updateDestinationTrips, setUpdateDestinationTrips] = useState([]);
+    const [destinationTripsWithActions, setDestinationTripsWithActions] = useState([]);
 
     useEffect(() => {
       const headers = {
@@ -29,25 +30,28 @@ let DestinationsTable = (props) =>
     }, []);
     //getting all of the destinationTrips for the edit.  
     useEffect(() => {
-        const headers = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": `Bearer ${props.token}` 
-            }
-        };
-        let url = "https://localhost:44365/api/destinationtrips/bytrip/" + props.tripID;
-        fetch(url, headers)
-            .then(response => {
-                if (response.status !== 200) {
-                    console.log(`Bad status: ${response.status}`);
-                    return Promise.reject("response is not 200 OK");
+        if(props.tripID !== undefined)
+        {
+            const headers = {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${props.token}` 
                 }
-                return response.json();
-            })
-            .then(json => setUpdateDestinationTrips(json))
-            .catch(console.log);
-        }, []);
+            };
+            let url = "https://localhost:44365/api/destinationtrips/bytrip/" + props.tripID;
+            fetch(url, headers)
+                .then(response => {
+                    if (response.status !== 200) {
+                        console.log(`Bad status: ${response.status}`);
+                        return Promise.reject("response is not 200 OK");
+                    }
+                    return response.json();
+                })
+                .then((json) => {setUpdateDestinationTrips(json); setDestinationTripsWithActions(json);})
+                .catch(console.log);
+        }
+    }, []);
 
     let handleChange = (event) => {
 
@@ -79,7 +83,15 @@ let DestinationsTable = (props) =>
             let newDT = [...updateDestinationTrips];
             newDT[index].description = event.target.value;
             setUpdateDestinationTrips(newDT);
-            props.editDestinations(newDT);
+        }
+        let index2 = destinationTripsWithActions.findIndex((v) => v.destinationID == event.target.id);
+        if(index2 >= 0){
+            let newDT2 = [...destinationTripsWithActions];
+            if(newDT2[index2].action !== "add"){
+                newDT2[index2].action = "edit";
+            }
+            props.editDestinations(newDT2);
+            setDestinationTripsWithActions(newDT2);
         }
     }
 
@@ -91,34 +103,44 @@ let DestinationsTable = (props) =>
     }
 
     let deleteDestinationTrip = (id) => {
-    const init = {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": "Bearer " + props.token
-        },
-        body: JSON.stringify({
-            "tripID":props.tripID,
-            "destinationID": id
-        })
-      };
+        const init = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer " + props.token
+            },
+            body: JSON.stringify({
+                "tripID":props.tripID,
+                "destinationID": id
+            })
+        };
   
-    fetch(`https://localhost:44365/api/destinationtrips`, init)
-        .then(response => {
-            if (response.status !== 200) {
-                return Promise.reject("response is not 200 OK");
-            }
-        })
-        .catch(console.log);
+        fetch(`https://localhost:44365/api/destinationtrips`, init)
+            .then(response => {
+                if (response.status !== 200) {
+                    return Promise.reject("response is not 200 OK");
+                }
+            })
+            .catch(console.log);
     }
 
     let handleEditDelete = (id) => {
-        deleteDestinationTrip(id);
         let index = updateDestinationTrips.findIndex((v) => v.destinationID == id);
         let dt = [...updateDestinationTrips];
         dt.splice(index,1);
         setUpdateDestinationTrips(dt);
+        let index2 = destinationTripsWithActions.findIndex((v) => v.destinationID == id);
+        let dt2 = [...destinationTripsWithActions];
+        if(dt2.action === undefined){
+            dt2[index2].action = "delete";
+        }
+        else
+        {
+            dt2.splice(index2,1);
+        }
+        props.editDestinations(dt2);
+        setDestinationTripsWithActions(dt2);
     }
 
     let handleSubmit = (event) => {
@@ -164,6 +186,7 @@ let DestinationsTable = (props) =>
 
     let handleEditSubmit = (event) => {
         event.preventDefault();
+        
         let dt = {
             destinationID: destinationTrip.destinationID,
             destination: destinationTrip.destination,
@@ -172,9 +195,15 @@ let DestinationsTable = (props) =>
         let newDestinationTrips = [...updateDestinationTrips];
         newDestinationTrips.push(dt);
         setUpdateDestinationTrips(newDestinationTrips);
+        
+        let newDestinationTrips2 = [...destinationTripsWithActions];
+        let dt2 = {...dt};
+        dt2.action = "add";
+        newDestinationTrips2.push(dt2);
         props.editDestinations(newDestinationTrips);
+        setDestinationTripsWithActions(newDestinationTrips);
+        
         event.target.reset();
-        addNewDestinationTrip(dt);
     }
 
     let destinationOptions = (list) =>
@@ -194,15 +223,14 @@ let DestinationsTable = (props) =>
             return list.map((destination, index) => {
                 return (
                     <tr key={index}>
-                        <td>
-                            <button onClick={() => handleDelete(destination.destinationID)} type="button" className="btn btn-danger deleteButton">-</button>
-                            {destination.destinationID}
-                        </td>
-                        <td>
+                        <td className="table-data-center">
                             {destination.destination}
                         </td>
-                        <td>
+                        <td className="table-data-center">
                             <input type="text" className="form-control inputs editInput" id={destination.destinationID} defaultValue={destination.description} onChange={handleUpdate}/>
+                        </td>
+                        <td>
+                            <button onClick={() => handleDelete(destination.destinationID)} type="button" className="btn btn-danger btn-round">-</button>
                         </td>
                     </tr>
                 );
@@ -217,15 +245,14 @@ let DestinationsTable = (props) =>
             return list.map((destination, index) => {
                 return (
                     <tr key={index}>
-                        <td>
-                            <button onClick={() => handleEditDelete(destination.destinationID)} type="button" className="btn btn-danger deleteButton">-</button>
-                            {destination.destinationID}
-                        </td>
-                        <td>
+                        <td className="table-data-center">
                             {destination.destination}
                         </td>
-                        <td>
+                        <td className="table-data-center">
                             <input type="text" className="form-control inputs" id={destination.destinationID} defaultValue={destination.description} onChange={onEditChange}/>
+                        </td>
+                        <td>
+                            <button onClick={() => handleEditDelete(destination.destinationID)} type="button" className="btn btn-danger btn-round">-</button>
                         </td>
                     </tr>
                 );
@@ -235,13 +262,14 @@ let DestinationsTable = (props) =>
     }
     if(props.isAdd){
         return (
-            <div class="container">
+            <div>
+                <h4 className="text-center">DESTINATIONS</h4>
                 <form onSubmit={handleSubmit} id="destinationTripForm" >
                     <table className="table table-striped" id="destinationTable">
-                        <thead className="thead-dark">
-                            <tr key={-1}>
-                                <th ></th>
-                                <th><h5 id="destinationHeader">DESTINATIONS</h5></th>
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Description</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -249,13 +277,6 @@ let DestinationsTable = (props) =>
                             <tr key={-2}>
                                 <td>
                                     <div className="form-group">
-                                        <label htmlfor="Description" className="control-label">Description</label>
-                                        <input form="destinationTripForm" type="text" htmlfor="Description" className="form-control inputs descriptionInput" onChange={handleChange}/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="form-group">
-                                        <label htmlfor="Destinations" className="control-label">Destinations</label>
                                         <select onChange={handleSelection} form="destinationTripForm">
                                             <option selected disabled>Choose Destination</option>
                                             {destinationOptions(state)}
@@ -263,7 +284,12 @@ let DestinationsTable = (props) =>
                                     </div>
                                 </td>
                                 <td>
-                                    <button form="destinationTripForm" type="submit" className="btn btn-primary addButton">&#43;</button>
+                                    <div className="form-group">
+                                        <input form="destinationTripForm" type="text" htmlFor="Description" className="form-control inputs descriptionInput" onChange={handleChange}/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button form="destinationTripForm" type="submit" className="btn btn-primary btn-round">&#43;</button>
                                 </td>
                             </tr>
                             {addedDestinations(destinationTrips)}
@@ -275,13 +301,14 @@ let DestinationsTable = (props) =>
     }
     else{
         return (
-            <div class="container">
+            <div>
+                <h4 className="text-center">DESTINATIONS</h4>
                 <form onSubmit={handleEditSubmit} id="destinationTripForm">
                     <table className="table table-striped" id="destinationTable">
-                        <thead className="thead-dark">
+                        <thead>
                             <tr>
-                                <th></th>
-                                <th><h5 id="destinationHeader">DESTINATIONS</h5></th>
+                                <th>Destination</th>
+                                <th>Description</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -289,13 +316,6 @@ let DestinationsTable = (props) =>
                         <tr key={-3}>
                                 <td>
                                     <div className="form-group">
-                                        <label htmlfor="Description" className="control-label">Description</label>
-                                        <input form="destinationTripForm" type="text" htmlfor="Description" className="form-control inputs descriptionInput" onChange={handleChange}/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="form-group">
-                                        <label htmlfor="Destinations" className="control-label">Destinations</label>
                                         <select onChange={handleSelection} form="destinationTripForm">
                                             <option selected disabled>Choose Destination</option>
                                             {destinationOptions(state)}
@@ -303,7 +323,12 @@ let DestinationsTable = (props) =>
                                     </div>
                                 </td>
                                 <td>
-                                    <button form="destinationTripForm" type="submit" className="btn btn-primary addButton">&#43;</button>
+                                    <div className="form-group">
+                                        <input form="destinationTripForm" type="text" htmlFor="Description" className="form-control inputs descriptionInput" onChange={handleChange}/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button form="destinationTripForm" type="submit" className="btn btn-primary btn-round">&#43;</button>
                                 </td>
                             </tr>
                             {editDestinations(updateDestinationTrips)}

@@ -7,13 +7,25 @@ label {
     padding-top: 10px;
     width: 100%;
 }
+
+.label-small {
+  width: auto !important;
+}
   
-input {
+.input-wide {
     border-radius: 15px;
     padding-left: 15px;
     padding-right: 15px;
     border: none;
     width: 75%;
+}
+
+.input-small {
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  width: 50%;
 }
 
 form {
@@ -77,6 +89,13 @@ form {
 .table-data {
   margin: auto;
   text-align: left;
+  vertical-align: middle;
+  font-size: larger;
+}
+
+.table-data-center {
+  margin: auto;
+  text-align: center;
   vertical-align: middle;
   font-size: larger;
 }

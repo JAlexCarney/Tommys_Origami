@@ -38,15 +38,15 @@ let Component = (props) =>
         <div className="form">
             <h3 className="form-header">Editing Trip{" " + props.trip.tripID}</h3>
             <div className="form-field">
-                <label htmlFor="startDate">Start Date</label>
-                <input type="date" defaultValue={props.trip.startDate.slice(0, 10)} name="startDate" onChange={handleChange}></input>
+                <label className="label-small" htmlFor="startDate">Start Date:&ensp;</label>
+                <input className="input-small" type="date" defaultValue={props.trip.startDate.slice(0, 10)} name="startDate" onChange={handleChange}></input>
             </div>
             <div className="form-field">
-                <label htmlFor="projectedEndDate">End Date</label>
-                <input type="date" defaultValue={props.trip.projectedEndDate.slice(0, 10)} name="projectedEndDate" onChange={handleChange}></input>
+                <label className="label-small" htmlFor="projectedEndDate">End Date:&ensp;</label>
+                <input className="input-small" type="date" defaultValue={props.trip.projectedEndDate.slice(0, 10)} name="projectedEndDate" onChange={handleChange}></input>
             </div>
             <div className="form-field">
-                <label htmlFor="isBooked">Booked?</label>
+                <label className="label-small">Booked:&ensp;</label>
                 <input type="checkbox" defaultChecked={props.trip.isBooked} name="isBooked" onChange={handleCheck}></input>
             </div>
             <DestinationTrip token={props.token} isAdd={false} tripID={props.trip.tripID} editDestinations={editDestinations}/>

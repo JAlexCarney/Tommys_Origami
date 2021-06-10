@@ -50,11 +50,11 @@ let Login = (props) => {
             <form onSubmit={onSubmit} className="form-group" id="login">
                 <div>
                     <label htmlFor="identifier" >Email/Username</label>
-                    <input type="text" name="identifier" onChange={handleChange}/>
+                    <input className="input-wide" type="text" name="identifier" onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="password" >Password</label>
-                    <input type="password" name="password" onChange={handleChange}/>
+                    <input className="input-wide" type="password" name="password" onChange={handleChange}/>
                 </div>
                 <ErrorMessage message={error}/>
                 <button className="btn btn-primary btn-submit" type="submit" >Login</button><br/>

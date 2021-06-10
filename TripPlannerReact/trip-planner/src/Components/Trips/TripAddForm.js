@@ -35,15 +35,15 @@ let Component = (props) =>
         <div className="form">
             <h3 className="form-header">Adding Trip</h3>
             <div className="form-field">
-                <label htmlFor="startDate">Start Date</label>
-                <input type="date" name="startDate" onChange={handleChange}></input>
+                <label className="label-small" htmlFor="startDate">Start Date:&ensp;</label>
+                <input className="input-small" type="date" name="startDate" onChange={handleChange}></input>
             </div>
             <div className="form-field">
-                <label htmlFor="projectedEndDate">End Date</label>
-                <input type="date" name="projectedEndDate" onChange={handleChange}></input>
+                <label className="label-small" htmlFor="projectedEndDate">End Date:&ensp;</label>
+                <input className="input-small" type="date" name="projectedEndDate" onChange={handleChange}></input>
             </div>
             <div className="form-field">
-                <label htmlFor="isBooked">Booked?</label>
+                <label className="label-small">Booked:&ensp;</label>
                 <input type="checkbox" name="isBooked" onChange={handleCheck}></input>
             </div>
             <DestinationTrip token={props.token} isAdd={true} addDestinations={addDestinations}/>

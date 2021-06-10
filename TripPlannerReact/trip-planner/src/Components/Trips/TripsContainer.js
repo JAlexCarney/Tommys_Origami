@@ -104,6 +104,7 @@ let UserProfile = (props) => {
     let editDestinationTrips = (id, list) => {
         console.log(id);
         console.log(list);
+        /*
         for(let i = 0; i < list.length; i++){
             const init = {
                 method: "PUT",
@@ -125,7 +126,7 @@ let UserProfile = (props) => {
                 })
                 .catch(console.log);
         }
-        
+        */
     }
 
     let viewUpdateForm = (trip) => {
