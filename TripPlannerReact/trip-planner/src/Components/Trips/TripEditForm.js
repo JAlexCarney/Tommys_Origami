@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import DestinationTrip from '../DestinationTrip/DestinationTrip';
+import ErrorMessage from '../ErrorMessage';
 
 let Component = (props) => 
 {
     const [state, setState] = useState({});
-    const [reset, setReset] = useState(0);
     const [editedDestinations, setEditedDestinations] = useState([]);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         setState(props.trip);
@@ -34,6 +35,28 @@ let Component = (props) =>
         setEditedDestinations(destinations);
     }
 
+    const submitEdit = (event) => {
+        event.preventDefault();
+
+        if(state.startDate === undefined){
+            setError("start date is required");
+            return;
+        }
+        if(state.projectedEndDate === undefined){
+            setError("end date is required");
+            return;
+        }
+        if(Date.parse(state.startDate) < Date.now()){
+            setError("start date must be a future date");
+            return;
+        }
+        if(Date.parse(state.projectedEndDate) < Date.parse(state.startDate)){
+            setError("end date must be after start date");
+            return;
+        }
+        props.handleEdit(state, editedDestinations);
+    }
+
     return (
         <div className="form">
             <h3 className="form-header">Editing Trip{" " + props.trip.tripID}</h3>
@@ -50,7 +73,8 @@ let Component = (props) =>
                 <input type="checkbox" defaultChecked={props.trip.isBooked} name="isBooked" onChange={handleCheck}></input>
             </div>
             <DestinationTrip token={props.token} isAdd={false} tripID={props.trip.tripID} editDestinations={editDestinations}/>
-        <form key={props.trip.tripID} onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, editedDestinations);}}>
+            <div className="text-center"><ErrorMessage message={error}/></div>
+        <form key={props.trip.tripID} onSubmit={submitEdit}>
             <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
             <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
         </form>

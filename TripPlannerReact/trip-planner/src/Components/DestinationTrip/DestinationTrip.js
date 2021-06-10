@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import ErrorMessage from '../ErrorMessage';
 
 let DestinationsTable = (props) => 
 {
     const [state, setState] = useState([]);
     const [destinationTrip, setDestinationTrip] = useState({});
     const [destinationTrips, setDestinationTrips] = useState([]);
+    const [error, setError] = useState("");
     const [updateDestinationTrips, setUpdateDestinationTrips] = useState([]);
     const [destinationTripsWithActions, setDestinationTripsWithActions] = useState([]);
 
@@ -169,6 +171,28 @@ let DestinationsTable = (props) =>
             destination: destinationTrip.destination,
             description: destinationTrip.description
         };
+
+        if(dt.description === undefined){
+            dt.description = "";
+        }
+
+        if(dt.destinationID === undefined){
+            setError("destination is required");
+            return;
+        }
+
+        for(let i = 0; i < destinationTrips.length; i++){
+            console.log(destinationTrips[i]);
+            console.log(dt.destinationID);
+            if(destinationTrips[i].destinationID == dt.destinationID)
+            {
+                setError("Cannot add duplicate destination");
+                return;
+            }
+        }
+
+        setError("");
+
         let newDestinationTrips = [...destinationTrips];
         newDestinationTrips.push(dt);
         setDestinationTrips(newDestinationTrips);
@@ -184,6 +208,28 @@ let DestinationsTable = (props) =>
             destination: destinationTrip.destination,
             description: destinationTrip.description
         };
+
+        if(dt.description === undefined){
+            dt.description = "";
+        }
+
+        if(dt.destinationID === undefined){
+            setError("destination is required");
+            return;
+        }
+
+        for(let i = 0; i < updateDestinationTrips.length; i++){
+            console.log(updateDestinationTrips[i]);
+            console.log(dt.destinationID);
+            if(updateDestinationTrips[i].destinationID == dt.destinationID)
+            {
+                setError("Cannot add duplicate destination");
+                return;
+            }
+        }
+
+        setError("");
+        
         let newDestinationTrips = [...updateDestinationTrips];
         newDestinationTrips.push(dt);
         setUpdateDestinationTrips(newDestinationTrips);
@@ -254,7 +300,7 @@ let DestinationsTable = (props) =>
             });
         }
     }
-    
+
     if(props.isAdd){
         return (
             <div>
@@ -291,6 +337,7 @@ let DestinationsTable = (props) =>
                         </tbody>
                     </table>
                 </form>
+                <div className="text-center"><ErrorMessage message={error}/></div>
             </div>
         );
     }
@@ -330,6 +377,7 @@ let DestinationsTable = (props) =>
                         </tbody>
                     </table>
                 </form>
+                <div className="text-center"><ErrorMessage message={error}/></div>
             </div>
         );
     }

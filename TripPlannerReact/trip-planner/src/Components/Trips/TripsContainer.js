@@ -220,7 +220,6 @@ let UserProfile = (props) => {
                         console.log(response.status);
                         return Promise.reject("response is not 200 OK");
                     }
-                    // return response.json();
                 })
                 .then(() => {
                     editDestinationTrips(trip.tripID, list);
