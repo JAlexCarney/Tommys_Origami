@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ErrorMessage from '../ErrorMessage';
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -9,6 +10,7 @@ let Component = (props) =>
     const [review, setReview] = useState({"destinationID":-1,"rating":0,"description":"Great Trip!"});
     const [reviews, setReviews] = useState([]);
     const [updateReviews, setUpdateReviews] = useState([]);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const headers = {
@@ -30,30 +32,6 @@ let Component = (props) =>
             .then(json => setState(json))
             .catch(console.log);
       }, []);
-
-    //getting all of the destinationTrips for the edit.  
-    /*
-    useEffect(() => {
-        const headers = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": `Bearer ${props.token}` 
-            }
-        };
-        let url = "https://localhost:44365/api/reviews/getbyuser/" + props.userID;
-        fetch(url, headers)
-            .then(response => {
-                if (response.status !== 200) {
-                    console.log(`Bad status: ${response.status}`);
-                    return Promise.reject("response is not 200 OK");
-                }
-                return response.json();
-            })
-            .then(json => setUpdateReviews(json))
-            .catch(console.log);
-    }, []);
-    */
 
     const handleChange = (event) => {
         let newReview = { ...review };
@@ -93,6 +71,7 @@ let Component = (props) =>
         });
     }
 
+   
     return (
         <div className="form">
             <h3 className="form-header">Adding Review</h3>
