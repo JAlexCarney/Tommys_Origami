@@ -9,13 +9,13 @@ let Component = (props) =>
     switch(props.form)
     {
         case "Add":
-            return (<TripAddForm handleAdd={props.action} exitView={props.exitAction}/>);
+            return (<TripAddForm handleAdd={props.action} exitView={props.exitAction} token={props.token}/>);
         case "Edit":
-            return (<TripEditForm trip={props.trip} handleEdit={props.action} exitView={props.exitAction}/>);
+            return (<TripEditForm trip={props.trip} handleEdit={props.action} exitView={props.exitAction} token={props.token}/>);
         case "View":
-            return (<TripViewForm trip={props.trip} exitView={props.exitAction}/>);
+            return (<TripViewForm trip={props.trip} exitView={props.exitAction} token={props.token}/>);
         case "Delete":
-            return (<TripDeleteForm trip={props.trip} handleDelete={props.action} exitView={props.exitAction}/>);
+            return (<TripDeleteForm trip={props.trip} handleDelete={props.action} exitView={props.exitAction} token={props.token}/>);
         default:
             return (<div></div>);
     }

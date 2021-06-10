@@ -288,7 +288,7 @@ let DestinationsTable = (props) =>
                             {destination.destination}
                         </td>
                         <td className="table-data-center">
-                            <div key={destination.description}>
+                            <div key={`${destination.destinationID} ${props.tripID}`}>
                                 <input type="text" className="form-control inputs" id={destination.destinationID} defaultValue={destination.description} onChange={onEditChange}/>
                             </div>
                         </td>

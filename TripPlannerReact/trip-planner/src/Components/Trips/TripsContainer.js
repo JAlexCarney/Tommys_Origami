@@ -304,7 +304,7 @@ let UserProfile = (props) => {
                         />
                 </div>
                 <div className="col col-6">
-                    <TripsFormSelector form={state.form} trip={state.trip} action={state.action} exitAction={exitView}/>
+                    <TripsFormSelector token={props.token} form={state.form} trip={state.trip} action={state.action} exitAction={exitView}/>
                 </div>
             </div>
         </div>
