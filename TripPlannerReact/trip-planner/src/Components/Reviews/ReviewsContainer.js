@@ -69,8 +69,6 @@ let UserProfile = (props) => {
     }
 
     let editReviews = (id, list) => {
-        console.log(id);
-        console.log(list);
         for(let i = 0; i < list.length; i++){
             const init = {
                 method: "PUT",
@@ -92,7 +90,6 @@ let UserProfile = (props) => {
                 })
                 .catch(console.log);
         }
-        
     }
 
     let viewUpdateForm = (review) => {
@@ -207,7 +204,7 @@ let UserProfile = (props) => {
                         />
                 </div>
                 <div className="col col-6">
-                    <ReviewsFormSelector form={state.form} review={state.review} action={state.action} exitAction={exitView}/>
+                    <ReviewsFormSelector token={props.token} form={state.form} review={state.review} action={state.action} exitAction={exitView}/>
                 </div>
             </div>
         </div>
