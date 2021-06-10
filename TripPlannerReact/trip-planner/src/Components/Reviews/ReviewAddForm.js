@@ -105,19 +105,19 @@ let Component = (props) =>
                                     </select>
                                 </div>
             <div className="form-field">
-                <label htmlFor="rating">Rating</label>
+                <label htmlFor="rating">Rating:&nbsp;</label>
                 <div className="wrapper">
                     
-                    <input name="rating" onChange={handleChange} type="radio" id="st1" value="5" />
-                    <label className="radio-inline" htmlFor="st1"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st2" value="4" />
-                    <label className="radio-inline" htmlFor="st2"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st3" value="3" />
-                    <label className="radio-inline" htmlFor="st3"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st4" value="2" />
-                    <label className="radio-inline" htmlFor="st4"></label>
-                    <input name="rating" onChange={handleChange} type="radio" id="st5" value="1" />
-                    <label className="radio-inline" htmlFor="st5"></label>
+                    <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st1" value="5" />
+                    <label className="label-small" htmlFor="st1"></label>
+                    <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st2" value="4" />
+                    <label className="label-small" htmlFor="st2"></label>
+                    <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st3" value="3" />
+                    <label className="label-small" htmlFor="st3"></label>
+                    <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st4" value="2" />
+                    <label className="label-small" htmlFor="st4"></label>
+                    <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st5" value="1" />
+                    <label className="label-small" htmlFor="st5"></label>
                 </div>
             </div>
             <div className="form-field">

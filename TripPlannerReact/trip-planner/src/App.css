@@ -10,6 +10,7 @@ label {
 
 .label-small {
   width: auto !important;
+  vertical-align: center;
 }
   
 .input-wide {
@@ -98,6 +99,11 @@ form {
   text-align: center;
   vertical-align: middle;
   font-size: larger;
+}
+
+.form-field {
+  margin: 0px;
+  align-content: center;
 }
 
 .login-container {

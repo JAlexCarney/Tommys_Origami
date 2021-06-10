@@ -63,15 +63,17 @@ h3 {
   letter-spacing: 1px;
 }
 
+.form-field {
+  vertical-align: center;
+}
 
   .wrapper {
-    position: relative;
-    display: inline-block;
     border: none;
     font-size: 14px;
-    margin: 50px auto;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: auto;
+    width: 250px;
+    text-align: center;
+    display: inline-block;
   }
   
   .wrapper input {
@@ -79,7 +81,6 @@ h3 {
     width: 1px;
     height: 1px;
     overflow: hidden;
-    position: absolute !important;
     clip: rect(1px 1px 1px 1px);
     clip: rect(1px, 1px, 1px, 1px);
     opacity: 0;
@@ -90,6 +91,7 @@ h3 {
     position: relative;
     float: right;
     color: #C8C8C8;
+    content: "☆";
   }
   
   .wrapper label:before {
@@ -102,16 +104,20 @@ h3 {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    content: "☆";
   }
   
   .wrapper input:checked ~ label:before {
     color: #FFC107;
+    content: "★";
   }
   
   .wrapper label:hover ~ label:before {
     color: #ffdb70;
+    content: "★";
   }
   
   .wrapper label:hover:before {
     color: #FFC107;
+    content: "★";
   }
