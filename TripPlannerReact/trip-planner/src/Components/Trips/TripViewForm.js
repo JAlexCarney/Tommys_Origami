@@ -28,6 +28,10 @@ let Component = (props) =>
             <table className="table table-striped">
                 <tbody>
                     <tr>
+                        <th>Name</th>
+                        <td>{props.trip.name}</td>
+                    </tr>
+                    <tr>
                         <th>Start Date</th>
                         <td>{props.trip.startDate.slice(0, 10)}</td>
                     </tr>

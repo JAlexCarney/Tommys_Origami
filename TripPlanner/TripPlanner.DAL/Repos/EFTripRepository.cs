@@ -67,6 +67,7 @@ namespace TripPlanner.DAL.Repos
                 }
                 editing.UserID = trip.UserID;
                 editing.StartDate = trip.StartDate;
+                editing.Name = trip.Name;
                 editing.ProjectedEndDate = trip.ProjectedEndDate;
                 editing.ActualEndDate = trip.ActualEndDate;
                 editing.IsBooked = trip.IsBooked;

@@ -107,7 +107,6 @@ let Component = (props) =>
             <div className="form-field">
                 <label htmlFor="rating">Rating:&nbsp;</label>
                 <div className="wrapper">
-                    
                     <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st1" value="5" />
                     <label className="label-small" htmlFor="st1"></label>
                     <input className="label-small" name="rating" onChange={handleChange} type="radio" id="st2" value="4" />

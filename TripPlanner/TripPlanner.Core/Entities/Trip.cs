@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace TripPlanner.Core.Entities
         public int TripID { get; set; }
         [ForeignKey("User")]
         public Guid UserID { get; set; }
+        public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ProjectedEndDate { get; set; }
         public DateTime? ActualEndDate { get; set; }
