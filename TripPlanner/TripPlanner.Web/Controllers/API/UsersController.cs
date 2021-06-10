@@ -34,7 +34,7 @@ namespace TripPlanner.Web.Controllers.API
             return BadRequest(result.Message);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost]
         public IActionResult AddUser(User user)
         {
             if (ModelState.IsValid)
