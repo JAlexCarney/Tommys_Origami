@@ -60,6 +60,10 @@ let Component = (props) =>
     return (
         <div className="form">
             <h3 className="form-header">Editing Trip{" " + props.trip.tripID}</h3>
+            <div className="form-field" key={props.trip.name}>
+                <label className="label-small" htmlFor="name">Name:&ensp;</label>
+                <input className="input-small" type="text" defaultValue={props.trip.name} name="name" onChange={handleChange}></input>
+            </div>
             <div className="form-field" key={props.trip.startDate.slice(0, 10)}>
                 <label className="label-small" htmlFor="startDate">Start Date:&ensp;</label>
                 <input className="input-small" type="date" defaultValue={props.trip.startDate.slice(0, 10)} name="startDate" onChange={handleChange}></input>

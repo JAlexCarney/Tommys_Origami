@@ -60,6 +60,10 @@ let Component = (props) =>
         <div className="form">
             <h3 className="form-header">Adding Trip</h3>
             <div className="form-field">
+                <label className="label-small" htmlFor="name">Name:&ensp;</label>
+                <input className="input-small" type="text" name="name" onChange={handleChange}></input>
+            </div>
+            <div className="form-field">
                 <label className="label-small" htmlFor="startDate">Start Date:&ensp;</label>
                 <input className="input-small" type="date" name="startDate" onChange={handleChange}></input>
             </div>
