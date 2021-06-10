@@ -56,9 +56,8 @@ let UserProfile = (props) => {
                   }
                   return response.json();
               })
-              .then((console.log))
+              .then(console.log("added dt!"))
               .catch(console.log);
-            
             }
 
         }
@@ -101,32 +100,102 @@ let UserProfile = (props) => {
         setState(newState);
     }
 
-    let editDestinationTrips = (id, list) => {
-        console.log(id);
-        console.log(list);
-        /*
-        for(let i = 0; i < list.length; i++){
-            const init = {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Bearer " + props.token
-                },
-                body: JSON.stringify(list[i])
-              };
-          
-            fetch("https://localhost:44365/api/destinationtrips", init)
-                .then(response => {
-                    if (response.status !== 200) {
-                        console.log(response.status);
-                        return Promise.reject("response is not 200 OK");
-                    }
-                    // return response.json();
-                })
-                .catch(console.log);
+    let deleteDestinationTrip = (tripID, destinationID) => {
+        console.log(destinationID);
+        const init = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer " + props.token
+            },
+            body: JSON.stringify({
+                "tripID":tripID,
+                "destinationID": destinationID
+            })
+        };
+  
+        fetch(`https://localhost:44365/api/destinationtrips`, init)
+            .then(response => {
+                if (response.status !== 200) {
+                    return Promise.reject("response is not 200 OK");
+                }
+            })
+            .catch(console.log);
+    }
+
+    let addNewDestinationTrip = (tripID, dt) => {
+        console.log(dt);
+        let newDT = {
+            tripID: tripID,
+            destinationID: dt.destinationID,
+            description: dt.description
         }
-        */
+        const init = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer " + props.token
+            },
+            body: JSON.stringify(newDT)
+          };
+          fetch("https://localhost:44365/api/destinationtrips", init)
+          .then(response => {
+              if (response.status !== 201) {
+                  return Promise.reject("response is not 200 OK");
+              }
+              return response.json();
+          })
+          .then((console.log))
+          .catch(console.log);
+    }
+
+    let editDestinationTrip = (tripID, dt) => {
+        console.log(dt);
+        let newDT = {
+            tripID: tripID,
+            destinationID: dt.destinationID,
+            description: dt.description
+        }
+        const init = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer " + props.token
+            },
+            body: JSON.stringify(newDT)
+          };
+      
+        fetch("https://localhost:44365/api/destinationtrips", init)
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(response.status);
+                    return Promise.reject("response is not 200 OK");
+                }
+                // return response.json();
+            })
+            .catch(console.log);
+    }
+
+    let editDestinationTrips = (id, list) => {
+        for(let i = 0; i < list.length; i++){
+            switch(list[i].action)
+            {
+                case "add":
+                    addNewDestinationTrip(id, list[i]);
+                    break;
+                case "edit":
+                    editDestinationTrip(id, list[i]);
+                    break;
+                case "delete":
+                    deleteDestinationTrip(id, list[i].destinationID);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     let viewUpdateForm = (trip) => {

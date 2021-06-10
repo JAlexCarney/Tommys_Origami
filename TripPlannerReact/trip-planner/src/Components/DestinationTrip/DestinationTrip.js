@@ -89,6 +89,7 @@ let DestinationsTable = (props) =>
             let newDT2 = [...destinationTripsWithActions];
             if(newDT2[index2].action !== "add"){
                 newDT2[index2].action = "edit";
+                newDT2[index2].description = event.target.value;
             }
             props.editDestinations(newDT2);
             setDestinationTripsWithActions(newDT2);
@@ -100,29 +101,6 @@ let DestinationsTable = (props) =>
         let dt = [...destinationTrips];
         dt.splice(index,1);
         setDestinationTrips(dt);
-    }
-
-    let deleteDestinationTrip = (id) => {
-        const init = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Bearer " + props.token
-            },
-            body: JSON.stringify({
-                "tripID":props.tripID,
-                "destinationID": id
-            })
-        };
-  
-        fetch(`https://localhost:44365/api/destinationtrips`, init)
-            .then(response => {
-                if (response.status !== 200) {
-                    return Promise.reject("response is not 200 OK");
-                }
-            })
-            .catch(console.log);
     }
 
     let handleEditDelete = (id) => {
@@ -157,33 +135,6 @@ let DestinationsTable = (props) =>
         event.target.reset();
     }
 
-    let addNewDestinationTrip = (dt) => {
-        let newDT = {
-            tripID: props.tripID,
-            destinationID: dt.destinationID,
-            description: dt.description
-        }
-        const init = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Bearer " + props.token
-            },
-            body: JSON.stringify(newDT)
-          };
-          fetch("https://localhost:44365/api/destinationtrips", init)
-          .then(response => {
-              if (response.status !== 201) {
-                  return Promise.reject("response is not 200 OK");
-              }
-              return response.json();
-          })
-          .then((console.log))
-          .catch(console.log);
-        
-    }
-
     let handleEditSubmit = (event) => {
         event.preventDefault();
         
@@ -199,9 +150,10 @@ let DestinationsTable = (props) =>
         let newDestinationTrips2 = [...destinationTripsWithActions];
         let dt2 = {...dt};
         dt2.action = "add";
+        console.log("adding DT2");
         newDestinationTrips2.push(dt2);
-        props.editDestinations(newDestinationTrips);
-        setDestinationTripsWithActions(newDestinationTrips);
+        props.editDestinations(newDestinationTrips2);
+        setDestinationTripsWithActions(newDestinationTrips2);
         
         event.target.reset();
     }
