@@ -171,7 +171,11 @@ let UserProfile = (props) => {
     }
 
     let viewViewForm = (review) => {
-        console.log("Viewing review");
+        let newState = {...state};
+        newState.form = "View";
+        newState.action = ()=>{};
+        newState.review = review;
+        setState(newState);
     }
 
     let exitView = () => {

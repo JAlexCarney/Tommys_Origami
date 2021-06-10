@@ -6,6 +6,7 @@ import React, {useState, useEffect} from 'react';
 let Component = (props) => 
 {
     const [state, setState] = useState([]);
+    const [review, setReview] = useState({"rating":props.review.rating});
     const [editedReviews, setEditedReviews] = useState([]);
 
     useEffect(() => {
@@ -64,8 +65,10 @@ let Component = (props) =>
                 <label htmlFor="description">Description</label>
                 <input type="text" className="form-control inputs" onChange={handleChange} defaultValue={props.review.description}/>
             </div>
-            <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
-            <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
+            <form onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, editedReviews);}}>
+                <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
+                <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
+            </form>
 
         </div>
     );

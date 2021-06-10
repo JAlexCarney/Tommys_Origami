@@ -7,8 +7,7 @@ let ReviewsTable = (props) =>
         return list.map((review, i) => {
             return (
                 <tr key={i} className="reviews-tr">
-                    <td><button className="btn btn-secondary btn-round table-data" onClick={() => props.handleView(review)}>{i}</button></td>
-                    <td className="table-data">{review.destinationID}</td>
+                    <td><button className="btn btn-secondary btn-round table-data" onClick={() => props.handleView(review)}>{review.destinationID}</button></td>
                     <td className="table-data">{review.description}</td>
                     <td className="table-data">{review.rating}</td>
                     <td><button className="btn btn-primary table-data btn-edit" onClick={() => props.handleUpdate(review)}>Edit</button>
@@ -22,7 +21,6 @@ let ReviewsTable = (props) =>
             <table className="table reviews-table">
                 <thead className="thead reviews-thead">
                     <tr>
-                        <th>#</th>
                         <th>Destination</th>
                         <th>Description</th>
                         <th>Rating</th>
@@ -31,7 +29,6 @@ let ReviewsTable = (props) =>
                 </thead>
                 <tbody className="reviews-tbody">
                     <tr key={-1} className="reviews-tr">
-                        <td className="table-data">-</td>
                         <td className="table-data">-</td>
                         <td className="table-data">-</td>
                         <td className="table-data">-</td>
