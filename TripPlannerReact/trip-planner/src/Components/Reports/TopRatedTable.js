@@ -11,7 +11,7 @@ let MostVisitedTable = (props) =>
                     <td className="table-data">{destination.city}</td>
                     <td className="table-data">{destination.stateProvince}</td>
                     <td className="table-data">{destination.country}</td>
-                    <td className="table-data">{destination.averageRating}</td>
+                    <td className="table-data">{destination.averageRating} ⭐</td>
                 </tr>
             );
         });

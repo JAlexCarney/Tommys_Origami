@@ -1,4 +1,5 @@
 import React from 'react';
+import DestinationTripView from '../DestinationTrip/DestinationTripView';
 
 let Component = (props) => 
 {
@@ -44,6 +45,7 @@ let Component = (props) =>
                     </tr>
                 </tbody>
             </table>
+            <DestinationTripView tripID={props.trip.tripID} token={props.token}/>
             <form onSubmit={(event) => {event.preventDefault(); props.exitView();}}>
                 <button className="btn btn-secondary btn-submit" type="submit">Stop Viewing</button>
             </form>

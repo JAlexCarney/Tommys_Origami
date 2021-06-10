@@ -74,19 +74,19 @@ let EditUser = (props) => {
             <form onSubmit={onSubmit} className="form-group">
                 <div>
                     <label htmlFor="email">New Email</label>
-                    <input type="email" name="email" value={user.email} onChange={handleChange}/>
+                    <input className="input-wide" type="email" name="email" value={user.email} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="username">New Username (opt.)</label>
-                    <input type="text" name="username" value={user.username} onChange={handleChange}/>
+                    <input className="input-wide" type="text" name="username" value={user.username} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="password">New Password</label>
-                    <input type="password" name="password" onChange={handleChange}/>
+                    <input className="input-wide" type="password" name="password" onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="confirmPassword">Confirm New Password</label>
-                    <input type="password" name="confirmPassword" onChange={handleChange}/>
+                    <input className="input-wide" type="password" name="confirmPassword" onChange={handleChange}/>
                 </div>
                 <ErrorMessage message={error}/>
                 <button className="btn btn-primary btn-submit" type="submit">Confirm Update</button><br/>

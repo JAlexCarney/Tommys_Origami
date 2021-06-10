@@ -1,4 +1,5 @@
 import React from 'react';
+import DestinationTripView from '../DestinationTrip/DestinationTripView';
 
 let Component = (props) => 
 {
@@ -44,6 +45,7 @@ let Component = (props) =>
                     </tr>
                 </tbody>
             </table>
+            <DestinationTripView tripID={props.trip.tripID} token={props.token}/>
             <form onSubmit={(event => {event.preventDefault(); props.handleDelete(props.trip);})}>
                 <button className="btn btn-danger btn-submit" type="submit">Confirm Delete</button><br/>
                 <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>

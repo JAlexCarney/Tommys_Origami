@@ -63,19 +63,19 @@ let CreateUser = (props) => {
             <form onSubmit={onSubmit} className="form-group">
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" onChange={handleChange}/>
+                    <input className="input-wide" type="email" name="email" onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="username">Username (opt.)</label>
-                    <input type="text" name="username" onChange={handleChange}/>
+                    <input className="input-wide" type="text" name="username" onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" onChange={handleChange}/>
+                    <input className="input-wide" type="password" name="password" onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" onChange={handleChange}/>
+                    <input className="input-wide" type="password" name="confirmPassword" onChange={handleChange}/>
                 </div>
                 <ErrorMessage message={error}/>
                 <button className="btn btn-primary btn-submit" type="submit">Confirm Creation</button><br/>
