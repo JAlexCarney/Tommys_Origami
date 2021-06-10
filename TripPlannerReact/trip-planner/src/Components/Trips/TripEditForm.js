@@ -38,6 +38,10 @@ let Component = (props) =>
     const submitEdit = (event) => {
         event.preventDefault();
 
+        if(state.name === undefined || state.name === ""){
+            setError("name is required");
+            return;
+        }
         if(state.startDate === undefined){
             setError("start date is required");
             return;
