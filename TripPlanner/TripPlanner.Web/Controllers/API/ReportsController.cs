@@ -22,7 +22,7 @@ namespace TripPlanner.Web.Controllers.API
 
         //toprated, mostvisited, mostrated
 
-        [Route("toprated")]
+        [Route("toprated"), Authorize]
         [HttpGet]
         public IActionResult TopRated()
         {
@@ -38,7 +38,7 @@ namespace TripPlanner.Web.Controllers.API
             }
         }
 
-        [Route("mostvisited")]
+        [Route("mostvisited"), Authorize]
         [HttpGet]
         public IActionResult MostVisited()
         {
@@ -54,7 +54,7 @@ namespace TripPlanner.Web.Controllers.API
             }
         }
 
-        [Route("mostrated")]
+        [Route("mostrated"), Authorize]
         [HttpGet]
         public IActionResult MostRated()
         {
@@ -70,7 +70,7 @@ namespace TripPlanner.Web.Controllers.API
             }
         }
 
-        [Route("destinationtripswithcity")]
+        [Route("destinationtripswithcity"), Authorize]
         [HttpGet]
         public IActionResult DestinationTripsWithCity()
         {
