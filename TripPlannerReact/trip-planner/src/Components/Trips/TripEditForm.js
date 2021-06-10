@@ -4,11 +4,17 @@ import DestinationTrip from '../DestinationTrip/DestinationTrip';
 let Component = (props) => 
 {
     const [state, setState] = useState({});
+    const [reset, setReset] = useState(0);
     const [editedDestinations, setEditedDestinations] = useState([]);
 
     useEffect(() => {
         setState(props.trip);
     }, [props.trip]);
+
+    if(state.tripID !== props.trip.tripID)
+    {
+        setState(props.trip);
+    }
 
     const handleChange = (event) => {
         let newState = { ...state };
@@ -20,32 +26,26 @@ let Component = (props) =>
 
     const handleCheck = (event) => {
         let newState = { ...state };
-        if(event.target.value === "on")
-        {
-            newState[event.target.name] = true;
-        }
-        else
-        {
-            newState[event.target.name] = false;
-        }
+        newState[event.target.name] = !state.isBooked;
         setState(newState);
     }
 
     const editDestinations = (destinations) => {
         setEditedDestinations(destinations);
     }
+
     return (
         <div className="form">
             <h3 className="form-header">Editing Trip{" " + props.trip.tripID}</h3>
-            <div className="form-field">
+            <div className="form-field" key={props.trip.startDate.slice(0, 10)}>
                 <label className="label-small" htmlFor="startDate">Start Date:&ensp;</label>
                 <input className="input-small" type="date" defaultValue={props.trip.startDate.slice(0, 10)} name="startDate" onChange={handleChange}></input>
             </div>
-            <div className="form-field">
+            <div className="form-field" key={props.trip.projectedEndDate.slice(0, 10)}>
                 <label className="label-small" htmlFor="projectedEndDate">End Date:&ensp;</label>
                 <input className="input-small" type="date" defaultValue={props.trip.projectedEndDate.slice(0, 10)} name="projectedEndDate" onChange={handleChange}></input>
             </div>
-            <div className="form-field">
+            <div className="form-field" key={props.trip.isBooked}>
                 <label className="label-small">Booked:&ensp;</label>
                 <input type="checkbox" defaultChecked={props.trip.isBooked} name="isBooked" onChange={handleCheck}></input>
             </div>

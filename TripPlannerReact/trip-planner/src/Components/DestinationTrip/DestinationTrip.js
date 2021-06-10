@@ -28,6 +28,45 @@ let DestinationsTable = (props) =>
           .then(json => setState(json))
           .catch(console.log);
     }, []);
+    
+    let setDestinationNames = (userDestinations) => {
+        const headers = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": `Bearer ${props.token}` 
+            }
+        };
+        let url = "https://localhost:44365/api/reports/destinationtripswithcity";
+        fetch(url, headers)
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(`Bad status: ${response.status}`);
+                    return Promise.reject("response is not 200 OK");
+                }
+                return response.json();
+            })
+            .then((json) => {
+                let destinationNames = [];
+                for(let i = 0; i < json.length; i++)
+                {
+                    for(let j = 0; j < userDestinations.length; j++)
+                    {
+                        if(json[i].destinationID === userDestinations[j].destinationID
+                            && json[i].tripID === userDestinations[j].tripID){
+                            let destinationName = {...json[i]};
+                            destinationName.destination = json[i].cityCountry;
+                            destinationNames.push(destinationName);
+                        }
+                    }
+                }
+                setUpdateDestinationTrips(destinationNames);
+                setDestinationTripsWithActions(destinationNames);
+            })
+            .catch(console.log);
+        
+    }
+    
     //getting all of the destinationTrips for the edit.  
     useEffect(() => {
         if(props.tripID !== undefined)
@@ -48,10 +87,12 @@ let DestinationsTable = (props) =>
                     }
                     return response.json();
                 })
-                .then((json) => {setUpdateDestinationTrips(json); setDestinationTripsWithActions(json);})
+                .then((json) => {
+                    setDestinationNames(json);
+                })
                 .catch(console.log);
         }
-    }, []);
+    }, [props.tripID]);
 
     let handleChange = (event) => {
 
@@ -201,7 +242,9 @@ let DestinationsTable = (props) =>
                             {destination.destination}
                         </td>
                         <td className="table-data-center">
-                            <input type="text" className="form-control inputs" id={destination.destinationID} defaultValue={destination.description} onChange={onEditChange}/>
+                            <div key={destination.description}>
+                                <input type="text" className="form-control inputs" id={destination.destinationID} defaultValue={destination.description} onChange={onEditChange}/>
+                            </div>
                         </td>
                         <td>
                             <button onClick={() => handleEditDelete(destination.destinationID)} type="button" className="btn btn-danger btn-round">-</button>
@@ -210,8 +253,8 @@ let DestinationsTable = (props) =>
                 );
             });
         }
-
     }
+    
     if(props.isAdd){
         return (
             <div>

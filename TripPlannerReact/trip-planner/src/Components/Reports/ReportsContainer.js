@@ -5,8 +5,9 @@ import TopRatedTable from './TopRatedTable';
 
 let ReportsContainer = (props) => {
     const [destinations, setDestinations] = useState([]);
-    const [page, setPage] = useState("MostVisited");
+    const [page, setPage] = useState("");
 
+    /*
     useEffect(()=>{
         switch(page)
         {
@@ -18,6 +19,7 @@ let ReportsContainer = (props) => {
                 getTopRated();
         }
     },[page])
+    */
 
     let getMostVisited = () => {
         const headers = {
@@ -98,9 +100,9 @@ let ReportsContainer = (props) => {
 
     return (
         <>
-            <button className="btn btn-success" onClick={()=> {setPage("MostVisited")}}>Most Visited</button>
-            <button className="btn btn-success" onClick={()=> {setPage("MostReviewed")}}>Most Reviewed</button>
-            <button className="btn btn-success" onClick={()=> {setPage("TopRated")}}>Top Rated</button>
+            <button className="btn btn-success" onClick={()=> {setPage("MostVisited"); getMostVisited();}}>Most Visited</button>
+            <button className="btn btn-success" onClick={()=> {setPage("MostReviewed"); getMostReviewed();}}>Most Reviewed</button>
+            <button className="btn btn-success" onClick={()=> {setPage("TopRated"); getTopRated();}}>Top Rated</button>
             {getTable()}
         </>
     );
