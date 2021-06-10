@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 let Component = (props) => 
 {
     const [state, setState] = useState([]);
-    const [review, setReview] = useState({"rating":props.review.rating});
+    const [review, setReview] = useState({"rating":props.review.rating, "description":props.review.description});
     const [editedReviews, setEditedReviews] = useState([]);
 
     useEffect(() => {

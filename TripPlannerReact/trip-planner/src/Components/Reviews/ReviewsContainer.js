@@ -113,7 +113,7 @@ let UserProfile = (props) => {
                 body: JSON.stringify(reviewWithUser)
               };
           
-            fetch("https://localhost:44365/api/getreviewsbyuser/" + props.userID, init)
+            fetch("https://localhost:44365/api/reviews/", init)
                 .then(response => {
                     if (response.status !== 200) {
                         console.log(response.status);
