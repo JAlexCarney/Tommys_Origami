@@ -12,11 +12,12 @@ let Component = (props) =>
     }, [props.review]);
 
     const handleChange = (event) => {
-        let newState = { ...state };
+        let newReview = { ...review };
 
-        newState[event.target.name] = event.target.value;
+        newReview[event.target.name] = event.target.value;
 
-        setState(newState);
+        setReview(newReview);
+        console.log(newReview);
     };
 
 
@@ -49,9 +50,9 @@ let Component = (props) =>
             </div>
             <div className="form-field">
                 <label htmlFor="description">Description</label>
-                <input type="text" className="form-control inputs" onChange={handleChange} defaultValue={props.review.description}/>
+                <input type="text" name="description" className="form-control inputs" onChange={handleChange} defaultValue={props.review.description}/>
             </div>
-            <form onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, editReviews);}}>
+            <form onSubmit={(event) => {event.preventDefault(); props.handleEdit(state, review);}}>
                 <button className="btn btn-primary btn-submit" type="submit">Confirm Edit</button><br/>
                 <button className="btn btn-secondary btn-submit" onClick={props.exitView}>Cancel</button>
             </form>
